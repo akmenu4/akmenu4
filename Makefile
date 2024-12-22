@@ -50,6 +50,7 @@ checkarm9_dsi:
 $(TARGET).nds : $(NITRO_FILES) arm7/$(TARGET).elf arm9/$(TARGET).elf
 	ndstool	-c $(TARGET).nds -7 arm7/$(TARGET).elf -9 arm9/$(TARGET).elf \
 	-b $(GAME_ICON) "$(GAME_TITLE);$(GAME_SUBTITLE1);$(GAME_SUBTITLE2)" \
+	-h 0x200 \
 	$(_ADDFILES)
 
 #---------------------------------------------------------------------------------
@@ -63,6 +64,7 @@ $(TARGET)_ak2.nds : $(NITRO_FILES) arm7/$(TARGET).elf arm9_ak2/$(TARGET).elf
 $(TARGET).dsi : $(NITRO_FILES) arm7/$(TARGET).elf arm9_dsi/$(TARGET).elf
 	ndstool	-c $@ -7 arm7/$(TARGET).elf -9 arm9_dsi/$(TARGET).elf \
 	-b $(GAME_ICON) "$(GAME_TITLE);$(GAME_SUBTITLE1);$(GAME_SUBTITLE2)" \
+	-g AKGE 01 "AKMENU" -z 80040407 -u 00030004 -a 00000138 -p 0001 \
 	$(_ADDFILES)
 
 #---------------------------------------------------------------------------------
@@ -87,4 +89,5 @@ clean:
 	$(MAKE) -C arm9_ak2 clean
 	$(MAKE) -C arm9_dsi clean
 	$(MAKE) -C arm7 clean
+	rm -rf data
 	rm -f *.nds *.dsi

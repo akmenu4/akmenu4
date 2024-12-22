@@ -139,6 +139,7 @@ int main() {
 
     irqInit();
     fifoInit();
+    touchInit();
 
     // Start the RTC tracking IRQ
     initClockIRQ();
@@ -150,6 +151,11 @@ int main() {
     irqSet(IRQ_VBLANK, VblankHandler);
 
     irqEnable(IRQ_VBLANK | IRQ_NETWORK);
+
+	if (isDSiMode() && REG_SNDEXTCNT != 0) {
+		i2cWriteRegister(0x4A, 0x12, 0x00);	// Press power-button for auto-reset
+		i2cWriteRegister(0x4A, 0x70, 0x01);	// Bootflag = Warmboot/SkipHealthSafety
+	}
 
     while (true) swiWaitForVBlank();
 }
