@@ -7,9 +7,9 @@ language = 1
 [start menu]
 Setting = Settings
 Set favorite = Set favorite
-Unset favorite = Unset favorite
+Unset favorite = Remove favorite
 Info = File Info
-Help = Help
+Help = Help & About
 Tools = Tools
 START = START
 
@@ -20,7 +20,7 @@ ok = OK
 cancel = Cancel
 
 [progress window]
-processing save = Processing, dont power off
+processing save = Creating save, dont power off
 processing copy = Copying file, dont power off, %c for cancel
 first use sd = Checking SD card for the first time using
 gba load = Loading gba game
@@ -83,7 +83,7 @@ system = System
 interface = Interface
 filesystem = File system
 gba = GBA
-patches = Patches
+patches = nds-bootstrap settings
 
 [save type]
 title = Settings
@@ -157,6 +157,7 @@ firsttime = Press OK to start first-time setup of nds-bootstrap. This may take a
 dsmode = DS-Only Mode
 inimissingtitle = INI error
 inimissing = ndsbs.ini is missing from _nds/akmenunext or is corrupt. Please restore this file or reinstall akmenu-next.
+phatCol = DS Phat Colors
 
 [language]
 text = Language
@@ -178,9 +179,9 @@ item0 = %c  Select Programs
 item1 = %c  Start/OK/YES
 item2 = %c  Back/Cancel/NO
 item3 = %c  View file info/Select Save Type
-item4 = %c  Switch SD/FLASH
+item4 = %c  Favourites
 item5 = %c  Back to parent directory
-item6 = %c  Adjust Brightness
+item6 = %c  Adjust Brightness (DS-Only)
 item7 = %s  Start Menu
 item8 = %s  Menu style new/classical
 
@@ -248,7 +249,7 @@ animation = Animation
 12 hour = 12-hour clock
 
 [gba settings]
-title = GBA settings
+title = Other Settings
 sleephack = Universal sleep
 autosave = Backup save at startup
 mode = Slot-2 mode
@@ -280,7 +281,8 @@ target slot = Target Save Slot
 [mainlist]
 flash memory = Flash Memory
 microsd card = microSD Card
-slot2 card = Slot2 Card
+slot2 card = Slot 2 Card
+slot1 card = Slot 1 Card
 favorites = Favorites
 
 [loader]
