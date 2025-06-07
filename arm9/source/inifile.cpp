@@ -210,9 +210,7 @@ bool CIniFile::SaveIniFile(const std::string& FileName) {
     }
 
     fclose(f);
-
     m_bModified = false;
-
     return true;
 }
 
