@@ -12,6 +12,7 @@
 
 #ifndef __KERNEL_LAUNCHER_SUPPORT__
 #define AKMENU_LOADER_NAME "nds-bootstrap"
+#define AKMENU_PICO_NAME "Pico-Loader"
 #define AKMENU_LOADER_VERSION ""
 #else  // __KERNEL_LAUNCHER_SUPPORT__
 

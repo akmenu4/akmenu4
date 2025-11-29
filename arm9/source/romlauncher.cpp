@@ -16,6 +16,7 @@
 #include "launcher/HomebrewLauncher.h"
 #include "launcher/ILauncher.h"
 #include "launcher/NdsBootstrapLauncher.h"
+#include "launcher/DSpicoLauncher.h"
 
 static SAVE_TYPE PrefillGame(u32 aGameCode) {
     if (0x45444759 == aGameCode)  // YGDE: 2209 - Diary Girl (USA)
@@ -244,7 +245,12 @@ TLaunchResult launchRom(const std::string& aFullPath, DSRomInfo& aRomInfo, bool 
         u8 language = aRomInfo.saveInfo().getLanguage();
         if (language) flags |= (language << PATCH_LANGUAGE_SHIFT) & PATCH_LANGUAGE_MASK;
 #ifndef __KERNEL_LAUNCHER_SUPPORT__
-        launcher = new NdsBootstrapLauncher();
+        if(gs().pico){
+            launcher = new DSpicoLauncher();
+        }
+        else {
+            launcher = new NdsBootstrapLauncher();
+        }
 #else  // __KERNEL_LAUNCHER_SUPPORT__
         if (aRomInfo.saveInfo().isNdsBootstrap())
             launcher = new NdsBootstrapLauncher();

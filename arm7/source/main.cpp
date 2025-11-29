@@ -10,6 +10,7 @@
 #include <string.h>
 #include "../../share/fifotool.h"
 #include "../../share/memtool.h"
+#include "picoLoader7.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -38,6 +39,22 @@ static u32 getSystem(void) {
         if (readPowerManagement(PM_NDSLITE_ADR) == readPowerManagement(5)) dsGen++;  // dslite
     }
     return dsGen;
+}
+
+typedef void (*pico_loader_7_func_t)(void);
+
+volatile bool reset_pico = false;
+
+static void resetDSPico() {
+    zeroMemory((void*)0x40000B0, 0x30);
+
+    REG_IME = IME_DISABLE;
+    REG_IE = 0;
+    REG_IF = ~0;
+
+    auto header7 = (pload_header7_t*)0x06000000;
+    // header7->dldiDriver = (void*)0x037F8000;
+    ((pico_loader_7_func_t)header7->entryPoint)();
 }
 
 static void prepairReset() {
@@ -103,6 +120,9 @@ static void menuValue32Handler(u32 value, void* data) {
             prepairReset();
             swiSoftReset();
             break;
+        case MENU_MSG_ARM7_REBOOT_PICOLOADER:
+            reset_pico = true;
+            break;
         case MENU_MSG_BRIGHTNESS_NEXT:
             brightnessNext();
             break;
@@ -162,6 +182,9 @@ int main() {
             sdmmc_get_cid(true, (u32*)0x2FFD7BC);    // Get eMMC CID
             *(u32*)(0x2FFFD0C) = 0;
         }
+        swiWaitForVBlank();
+        if(reset_pico)
+            resetDSPico();
         swiWaitForVBlank();
     }
 }
