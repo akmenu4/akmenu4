@@ -1,90 +1,112 @@
-#---------------------------------------------------------------------------------
-.SUFFIXES:
-#---------------------------------------------------------------------------------
-ifeq ($(strip $(DEVKITARM)),)
-$(error "Please set DEVKITARM in your environment. export DEVKITARM=<path to>devkitARM")
+# SPDX-License-Identifier: CC0-1.0
+#
+# SPDX-FileContributor: Antonio Niño Díaz, 2023
+
+BLOCKSDS	?= /opt/blocksds/core
+BLOCKSDSEXT	?= /opt/blocksds/external
+
+# User config
+# ===========
+
+NAME		:= $(shell basename $(CURDIR))
+
+PLATFORM	?=
+
+GAME_TITLE     := acekard
+GAME_SUBTITLE := Real Play Gear
+GAME_AUTHOR := www.acekard.com
+GAME_ICON	:= icon.bmp
+
+# DLDI and internal SD slot of DSi
+# --------------------------------
+
+# Root folder of the SD image
+SDROOT		:= sdroot
+# Name of the generated image it "DSi-1.sd" for no$gba in DSi mode
+SDIMAGE		:= image.bin
+
+# Source code paths
+# -----------------
+
+# List of folders to combine into the root of NitroFS:
+NITROFSDIR	:=
+
+# Tools
+# -----
+
+MKDIR		:= mkdir
+RM		:= rm -rf
+
+# Verbose flag
+# ------------
+
+ifeq ($(VERBOSE),1)
+V		:=
+else
+V		:= @
 endif
 
-export TARGET := $(shell basename $(CURDIR))
-export TOPDIR := $(CURDIR)
+# Directories
+# -----------
 
-# GMAE_ICON is the image used to create the game icon, leave blank to use default rule
-GAME_ICON :=
+ARM9DIR		:= arm9
+ARM7DIR		:= arm7
 
-# specify a directory which contains the nitro filesystem
-# this is relative to the Makefile
-NITRO_FILES :=
+# Build artfacts
+# --------------
 
-# These set the information text in the nds file
-GAME_TITLE     := acekard
-GAME_SUBTITLE1 := Real Play Gear
-GAME_SUBTITLE2 := www.acekard.com
+ROM		:= $(NAME).nds
 
-include $(DEVKITARM)/ds_rules
+ifneq ($(PLATFORM),)
+ROM		:= $(NAME)_$(PLATFORM).nds
+endif
 
-.PHONY: checkarm7 checkarm9 checkarm9_ak2 checkarm9_dsi clean
+# Targets
+# -------
 
-#---------------------------------------------------------------------------------
-# main targets
-#---------------------------------------------------------------------------------
-all:	checkarm7 checkarm9 checkarm9_ak2 checkarm9_dsi \
-		$(TARGET).nds $(TARGET)_ak2.nds $(TARGET).dsi
+.PHONY: all clean arm9 arm7 dldipatch sdimage
 
-#---------------------------------------------------------------------------------
-checkarm7:
-	$(MAKE) -C arm7
+all: $(ROM)
 
-#---------------------------------------------------------------------------------
-checkarm9:
-	$(MAKE) -C arm9
-
-#---------------------------------------------------------------------------------
-checkarm9_ak2:
-	$(MAKE) -C arm9_ak2
-
-#---------------------------------------------------------------------------------
-checkarm9_dsi:
-	$(MAKE) -C arm9_dsi
-
-#---------------------------------------------------------------------------------
-$(TARGET).nds : $(NITRO_FILES) arm7/$(TARGET).elf arm9/$(TARGET).elf
-	ndstool	-c $(TARGET).nds -7 arm7/$(TARGET).elf -9 arm9/$(TARGET).elf \
-	-b $(GAME_ICON) "$(GAME_TITLE);$(GAME_SUBTITLE1);$(GAME_SUBTITLE2)" \
-	$(_ADDFILES)
-
-#---------------------------------------------------------------------------------
-$(TARGET)_ak2.nds : $(NITRO_FILES) arm7/$(TARGET).elf arm9_ak2/$(TARGET).elf
-	ndstool	-c $@ -7 arm7/$(TARGET).elf -9 arm9_ak2/$(TARGET).elf \
-	-b $(GAME_ICON) "$(GAME_TITLE);$(GAME_SUBTITLE1);$(GAME_SUBTITLE2)" \
-	$(_ADDFILES)
-	dlditool DLDI/ak2_sd.dldi $@
-
-#---------------------------------------------------------------------------------
-$(TARGET).dsi : $(NITRO_FILES) arm7/$(TARGET).elf arm9_dsi/$(TARGET).elf
-	ndstool	-c $@ -7 arm7/$(TARGET).elf -9 arm9_dsi/$(TARGET).elf \
-	-b $(GAME_ICON) "$(GAME_TITLE);$(GAME_SUBTITLE1);$(GAME_SUBTITLE2)" \
-	$(_ADDFILES)
-
-#---------------------------------------------------------------------------------
-arm7/$(TARGET).elf:
-	$(MAKE) -C arm7
-
-#---------------------------------------------------------------------------------
-arm9/$(TARGET).elf:
-	$(MAKE) -C arm9
-
-#---------------------------------------------------------------------------------
-arm9_ak2/$(TARGET).elf:
-	$(MAKE) -C arm9_ak2
-
-#---------------------------------------------------------------------------------
-arm9_dsi/$(TARGET).elf:
-	$(MAKE) -C arm9_dsi
-
-#---------------------------------------------------------------------------------
 clean:
-	$(MAKE) -C arm9 clean
-	$(MAKE) -C arm9_ak2 clean
-	$(MAKE) -C arm9_dsi clean
-	$(MAKE) -C arm7 clean
-	rm -f *.nds *.dsi
+	@echo "  CLEAN"
+	$(V)$(MAKE) -f Makefile.arm9 clean --no-print-directory
+	$(V)$(MAKE) -f Makefile.arm7 clean --no-print-directory
+	$(V)$(RM) $(ROM) build $(SDIMAGE)
+
+arm9:
+	$(V)+$(MAKE) -f Makefile.arm9 PLATFORM=$(PLATFORM) --no-print-directory
+
+arm7:
+	$(V)+$(MAKE) -f Makefile.arm7 --no-print-directory
+
+ifneq ($(strip $(NITROFSDIR)),)
+# Additional arguments for ndstool
+NDSTOOL_ARGS	:= -d $(NITROFSDIR)
+
+# Make the NDS ROM depend on the filesystem only if it is needed
+$(ROM): $(NITROFSDIR)
+endif
+
+# Combine the title strings
+ifeq ($(strip $(GAME_SUBTITLE)),)
+    GAME_FULL_TITLE := $(GAME_TITLE);$(GAME_AUTHOR)
+else
+    GAME_FULL_TITLE := $(GAME_TITLE);$(GAME_SUBTITLE);$(GAME_AUTHOR)
+endif
+
+$(ROM): arm9 arm7
+	@echo "  NDSTOOL $@"
+	$(V)$(BLOCKSDS)/tools/ndstool/ndstool -c $@ \
+		-7 build/arm7.elf -9 build/arm9.elf \
+		-b $(GAME_ICON) "$(GAME_FULL_TITLE)" \
+		$(NDSTOOL_ARGS)
+
+sdimage:
+	@echo "  MKFATIMG $(SDIMAGE) $(SDROOT)"
+	$(V)$(BLOCKSDS)/tools/mkfatimg/mkfatimg -t $(SDROOT) $(SDIMAGE)
+
+dldipatch: $(ROM)
+	@echo "  DLDIPATCH $(ROM)"
+	$(V)$(BLOCKSDS)/tools/dldipatch/dldipatch patch \
+		$(BLOCKSDS)/sys/dldi_r4/r4tf.dldi $(ROM)
