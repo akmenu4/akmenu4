@@ -59,3 +59,5 @@
 #define SFN_ICONS_DIRECTORY SFN_SYSTEM_DIR "icons/"
 
 #define SFN_CHEATS SFN_SYSTEM_DIR "cheats/usrcheat.dat"
+
+#define SFN_BOOTLIB SFN_SYSTEM_DIR "load.bin"
