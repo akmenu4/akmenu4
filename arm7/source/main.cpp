@@ -45,11 +45,6 @@ static void prepairResetTT() {
 }
 
 static void prepairReset() {
-    // enable sound
-    if (2 == getSystem())
-        writePowerManagement(PM_CONTROL_REG,
-                             (readPowerManagement(PM_CONTROL_REG) & ~PM_SOUND_MUTE) | PM_SOUND_AMP);
-
     // disble rtc irq, on some games enabled rtc irq caused tearing.
     uint8 command[2];
     command[0] = WRITE_STATUS_REG2;
@@ -141,10 +136,6 @@ static void menuValue32Handler(u32 value, void* data) {
 }
 
 int main() {
-    // mute sound
-    if (2 == getSystem())
-        writePowerManagement(PM_CONTROL_REG,
-                             (readPowerManagement(PM_CONTROL_REG) & ~PM_SOUND_AMP) | PM_SOUND_MUTE);
     // switch on backlight on both screens
     writePowerManagement(PM_CONTROL_REG, readPowerManagement(PM_CONTROL_REG) | PM_BACKLIGHT_BOTTOM |
                                                  PM_BACKLIGHT_TOP);
