@@ -8,7 +8,7 @@
 */
 
 #include "diskicon.h"
-#include "../../share/memtool.h"
+#include <memtool.h>
 #include "bmp15.h"
 #include "globalsettings.h"
 #include "inifile.h"

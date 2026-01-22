@@ -8,7 +8,7 @@
 */
 
 #include "mainwnd.h"
-#include "../../share/fifotool.h"
+#include <fifotool.h>
 #include "dbgtool.h"
 #include "systemfilenames.h"
 #include "timer.h"

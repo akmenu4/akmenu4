@@ -8,7 +8,7 @@
 */
 
 #include "calendar.h"
-#include "../../share/memtool.h"
+#include <memtool.h>
 #include "globalsettings.h"
 #include "inifile.h"
 #include "stringtool.h"

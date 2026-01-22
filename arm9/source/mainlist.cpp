@@ -11,8 +11,8 @@
 
 #include "mainlist.h"
 #include <fat.h>
+#include <memtool.h>
 #include <sys/dir.h>
-#include "../../share/memtool.h"
 #include "dbgtool.h"
 #include "folder_banner_bin.h"
 #include "gba_banner_bin.h"

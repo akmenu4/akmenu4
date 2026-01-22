@@ -9,8 +9,8 @@
 
 #pragma once
 
+#include <memtool.h>
 #include <nds.h>
-#include "../../share/memtool.h"
 #include "dbgtool.h"
 #include "gdi.h"
 #include "stringtool.h"
