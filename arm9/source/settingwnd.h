@@ -10,11 +10,11 @@
 #pragma once
 
 #include <string>
-#include "form.h"
-#include "formdesc.h"
-#include "message.h"
-#include "spinbox.h"
-#include "statictext.h"
+#include "ui/form.h"
+#include "ui/formdesc.h"
+#include "ui/message.h"
+#include "ui/spinbox.h"
+#include "ui/statictext.h"
 
 class cSettingWnd : public akui::cForm {
   public:

@@ -10,11 +10,11 @@
 #include "mainwnd.h"
 #include "../../share/fifotool.h"
 #include "dbgtool.h"
-#include "msgbox.h"
 #include "systemfilenames.h"
 #include "timer.h"
 #include "timetool.h"
-#include "windowmanager.h"
+#include "ui/msgbox.h"
+#include "ui/windowmanager.h"
 
 #include "datetime.h"
 
@@ -24,13 +24,12 @@
 #include "helpwnd.h"
 #include "inifile.h"
 #include "language.h"
-#include "progresswnd.h"
 #include "rominfownd.h"
 #include "romlauncher.h"
+#include "ui/progresswnd.h"
 
 #include <dirent.h>
 #include <fat.h>
-#include <sys/iosupport.h>
 
 #include "launcher/HomebrewLauncher.h"
 #include "launcher/NdsBootstrapLauncher.h"

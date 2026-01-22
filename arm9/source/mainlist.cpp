@@ -21,13 +21,13 @@
 #include "microsd_banner_bin.h"
 #include "nand_banner_bin.h"
 #include "nds_save_banner_bin.h"
-#include "progresswnd.h"
 #include "startmenu.h"
 #include "systemfilenames.h"
 #include "timetool.h"
+#include "ui/progresswnd.h"
+#include "ui/windowmanager.h"
 #include "unicode.h"
 #include "unknown_banner_bin.h"
-#include "windowmanager.h"
 
 using namespace akui;
 

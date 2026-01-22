@@ -8,7 +8,7 @@
 */
 
 #include "msgbox.h"
-#include "fontfactory.h"
+#include "../font/fontfactory.h"
 #include "language.h"
 #include "ui.h"
 

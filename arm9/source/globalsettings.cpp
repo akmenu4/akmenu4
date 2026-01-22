@@ -10,7 +10,7 @@
 #include "globalsettings.h"
 #include <string.h>
 #include <sys/stat.h>
-#include "fontfactory.h"
+#include "font/fontfactory.h"
 #include "inifile.h"
 #include "systemfilenames.h"
 

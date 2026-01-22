@@ -12,7 +12,7 @@
 #include "bmp15.h"
 #include "datetime.h"
 #include "singleton.h"
-#include "window.h"
+#include "ui/window.h"
 
 // class cClockNumber : public
 class cBigClock : public akui::cWindow {

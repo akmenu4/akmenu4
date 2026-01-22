@@ -14,8 +14,8 @@
 #include "inifile.h"
 #include "stringtool.h"
 #include "systemfilenames.h"
+#include "ui/windowmanager.h"
 #include "unicode.h"
-#include "windowmanager.h"
 
 using namespace akui;
 

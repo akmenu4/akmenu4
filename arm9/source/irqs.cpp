@@ -15,9 +15,9 @@
 #include "dbgtool.h"
 #include "diskicon.h"
 #include "timer.h"
+#include "ui/windowmanager.h"
 #include "userinput.h"
 #include "userwnd.h"
-#include "windowmanager.h"
 
 using namespace akui;
 

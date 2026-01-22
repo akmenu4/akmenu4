@@ -10,9 +10,9 @@
 #include "userinput.h"
 #include <cstring>
 #include "dbgtool.h"
-#include "keymessage.h"
 #include "timer.h"
-#include "windowmanager.h"
+#include "ui/keymessage.h"
+#include "ui/windowmanager.h"
 
 using namespace akui;
 

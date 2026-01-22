@@ -10,12 +10,12 @@
 #include <fat.h>
 #include "datetime.h"
 #include "exptools.h"
-#include "fontfactory.h"
+#include "font/fontfactory.h"
 #include "language.h"
-#include "msgbox.h"
-#include "progresswnd.h"
-#include "uisettings.h"
-#include "windowmanager.h"
+#include "ui/msgbox.h"
+#include "ui/progresswnd.h"
+#include "ui/uisettings.h"
+#include "ui/windowmanager.h"
 
 using namespace akui;
 

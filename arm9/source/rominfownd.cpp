@@ -7,18 +7,20 @@
     SPDX-License-Identifier: GPL-3.0-or-later
 */
 
-#include "rominfownd.h"
+#include <time.h>
+
 #include <sys/stat.h>
 #include "cheatwnd.h"
 #include "gbaloader.h"
 #include "globalsettings.h"
 #include "language.h"
-#include "msgbox.h"
+#include "rominfownd.h"
 #include "systemfilenames.h"
 #include "ui/binaryfind.h"
-#include "uisettings.h"
+#include "ui/msgbox.h"
+#include "ui/uisettings.h"
+#include "ui/windowmanager.h"
 #include "unicode.h"
-#include "windowmanager.h"
 
 using namespace akui;
 
