@@ -6,10 +6,10 @@
     SPDX-License-Identifier: GPL-3.0-or-later
 */
 
-#include <nds.h>
-#include <string.h>
 #include <fifotool.h>
 #include <memtool.h>
+#include <nds.h>
+#include <string.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -141,7 +141,7 @@ int main() {
     fifoInit();
 
     // Start the RTC tracking IRQ
-    initClockIRQ();
+    initClockIRQTimer(LIBNDS_DEFAULT_TIMER_RTC);
 
     fifoSetValue32Handler(FIFO_USER_01, menuValue32Handler, 0);
 
