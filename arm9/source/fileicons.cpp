@@ -8,10 +8,10 @@
 #include "fileicons.h"
 #include <fat.h>
 #include <sys/dir.h>
+#include "binaryfind.h"
 #include "globalsettings.h"
 #include "icons.h"
 #include "systemfilenames.h"
-#include "ui/binaryfind.h"
 
 cFileIconItem::cFileIconItem(const std::string& aFolderName, const std::string& aFileName)
     : _loaded(false), _foldername(aFolderName), _filename(aFileName) {}
