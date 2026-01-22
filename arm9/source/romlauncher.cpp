@@ -15,7 +15,6 @@
 #include "launcher/HomebrewLauncher.h"
 #include "launcher/ILauncher.h"
 #include "launcher/NdsBootstrapLauncher.h"
-#include "launcher/TopToyLauncher.h"
 
 static SAVE_TYPE PrefillGame(u32 aGameCode) {
     if (0x45444759 == aGameCode)  // YGDE: 2209 - Diary Girl (USA)
@@ -239,11 +238,7 @@ TLaunchResult launchRom(const std::string& aFullPath, DSRomInfo& aRomInfo, bool 
         if (aRomInfo.saveInfo().isNdsBootstrap())
             launcher = new NdsBootstrapLauncher();
         else
-#ifdef __TTLAUNCHER__
-            launcher = new TopToyLauncher();
-#else   // __TTLAUNCHER__
             launcher = new AcekardLauncher();
-#endif  // __TTLAUNCHER__
 #endif  // __KERNEL_LAUNCHER_SUPPORT__
     } else {
         if (!aMenu) saveManager().saveLastInfo(aFullPath);
