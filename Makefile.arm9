@@ -29,14 +29,6 @@ DEFINES	+= -D__KERNEL_LAUNCHER_SUPPORT__ -D__AKLOADER_AK2__
 else
 ifneq ($(findstring dsi,$(PLATFORM)),)
 DEFINES	+= -D__DSIMODE__
-else
-ifneq ($(findstring m3,$(PLATFORM)),)
-DEFINES	+= -D__KERNEL_LAUNCHER_SUPPORT__ -D__TTLAUNCHER__ -D__TTLAUNCHER_M3__
-else
-ifneq ($(findstring tt,$(PLATFORM)),)
-DEFINES	+= -D__KERNEL_LAUNCHER_SUPPORT__ -D__TTLAUNCHER__ -D__TTLAUNCHER_TT__
-endif
-endif
 endif
 endif
 
