@@ -8,7 +8,7 @@
 */
 
 #include "helpwnd.h"
-#include "font/fontfactory.h"
+#include <font/fontfactory.h>
 #include "language.h"
 #include "ui/msgbox.h"
 #include "ui/uisettings.h"

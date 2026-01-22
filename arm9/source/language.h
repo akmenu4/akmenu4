@@ -9,10 +9,10 @@
 
 #pragma once
 
+#include <singleton.h>
 #include "dbgtool.h"
 #include "globalsettings.h"
 #include "inifile.h"
-#include "singleton.h"
 #include "stringtool.h"
 #include "systemfilenames.h"
 #include "timetool.h"

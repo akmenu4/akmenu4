@@ -10,10 +10,10 @@
 #pragma once
 
 #include <nds.h>
+#include <singleton.h>
 #include <string>
 #include <vector>
 #include "globalsettings.h"
-#include "singleton.h"
 
 typedef struct _SAVE_INFO_T {
     u8 gameTitle[12];

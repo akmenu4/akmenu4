@@ -8,7 +8,7 @@
 */
 
 #include "button.h"
-#include "../font/fontfactory.h"
+#include <font/fontfactory.h>
 #include "ui.h"
 #include "window.h"
 

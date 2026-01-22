@@ -9,9 +9,9 @@
 
 #pragma once
 
+#include <singleton.h>
 #include "bmp15.h"
 #include "datetime.h"
-#include "singleton.h"
 #include "ui/window.h"
 
 // class cClockNumber : public
