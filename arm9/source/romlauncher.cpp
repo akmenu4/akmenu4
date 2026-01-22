@@ -234,7 +234,7 @@ TLaunchResult launchRom(const std::string& aFullPath, DSRomInfo& aRomInfo, bool 
 
 #ifndef __KERNEL_LAUNCHER_SUPPORT__
         launcher = new NdsBootstrapLauncher();
-#else  // __KERNEL_LAUNCHER_SUPPORT__
+#else   // __KERNEL_LAUNCHER_SUPPORT__
         if (aRomInfo.saveInfo().isNdsBootstrap())
             launcher = new NdsBootstrapLauncher();
         else

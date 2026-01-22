@@ -68,7 +68,7 @@ int main(void) {
     initInput();
 
     // turn led on
-    ledBlink(PM_LED_ON);
+    ledBlink(LED_ALWAYS_ON);
 
     // init graphics
     gdi().init();
