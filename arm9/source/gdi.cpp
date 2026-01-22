@@ -8,11 +8,11 @@
 */
 
 #include "gdi.h"
+#include <font/fontfactory.h>
 #include <cstdio>
 #include <cstring>
 #include "../../share/memtool.h"
 #include "dbgtool.h"
-#include "font/fontfactory.h"
 #include "globalsettings.h"
 #include "sprite.h"
 #include "userinput.h"

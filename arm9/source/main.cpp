@@ -33,8 +33,8 @@
 #include "inifile.h"
 #include "irqs.h"
 
+#include <font/fontfactory.h>
 #include "diskicon.h"
-#include "font/fontfactory.h"
 #include "language.h"
 #include "ui/progresswnd.h"
 

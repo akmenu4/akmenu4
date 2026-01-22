@@ -10,8 +10,8 @@
 #pragma once
 
 #include <nds.h>
+#include <singleton.h>
 #include <time.h>
-#include "singleton.h"
 #include "stringtool.h"
 
 class cDateTime {

@@ -9,9 +9,9 @@
 
 #include <nds.h>
 
-#include "singleton.h"
+#include <singleton.h>
 
-#include "font.h"
+#include <font/font.h>
 class cFontFactory {
   public:
     cFontFactory();

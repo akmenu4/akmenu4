@@ -7,7 +7,7 @@
     SPDX-License-Identifier: GPL-3.0-or-later
 */
 
-#include "fontfactory.h"
+#include <font/fontfactory.h>
 #include "font_pcf.h"
 #include "language.h"
 #include "stringtool.h"

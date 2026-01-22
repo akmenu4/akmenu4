@@ -8,9 +8,9 @@
 */
 
 #include "globalsettings.h"
+#include <font/fontfactory.h>
 #include <string.h>
 #include <sys/stat.h>
-#include "font/fontfactory.h"
 #include "inifile.h"
 #include "systemfilenames.h"
 

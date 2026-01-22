@@ -10,7 +10,7 @@
 #pragma once
 
 #include <nds.h>
-#include "singleton.h"
+#include <singleton.h>
 #include "ui/form.h"
 
 class cCalendarWnd : public akui::cForm {

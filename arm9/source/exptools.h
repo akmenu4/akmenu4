@@ -9,7 +9,7 @@
 #pragma once
 
 #include <nds.h>
-#include "singleton.h"
+#include <singleton.h>
 
 class cExpansion {
   public:

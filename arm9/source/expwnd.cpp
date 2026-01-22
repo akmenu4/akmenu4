@@ -8,9 +8,9 @@
 
 #include "expwnd.h"
 #include <fat.h>
+#include <font/fontfactory.h>
 #include "datetime.h"
 #include "exptools.h"
-#include "font/fontfactory.h"
 #include "language.h"
 #include "ui/msgbox.h"
 #include "ui/progresswnd.h"

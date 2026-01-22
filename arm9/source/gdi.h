@@ -10,10 +10,10 @@
 #pragma once
 
 #include <nds.h>
+#include <singleton.h>
 #include <vector>
 #include "bmp15.h"
 #include "gdi.h"
-#include "singleton.h"
 
 #define SYSTEM_FONT_HEIGHT 12
 #define COLOR u16
