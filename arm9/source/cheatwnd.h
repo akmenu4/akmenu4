@@ -10,11 +10,11 @@
 #include <nds/ndstypes.h>
 #include <vector>
 
-#include "button.h"
-#include "form.h"
-#include "formdesc.h"
-#include "listview.h"
-#include "statictext.h"
+#include "ui/button.h"
+#include "ui/form.h"
+#include "ui/formdesc.h"
+#include "ui/listview.h"
+#include "ui/statictext.h"
 
 class cCheatWnd : public akui::cForm {
   public:

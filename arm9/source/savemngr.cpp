@@ -18,9 +18,9 @@
 #include "dsrom.h"
 #include "inifile.h"
 #include "language.h"
-#include "progresswnd.h"
 #include "systemfilenames.h"
-#include "ui.h"
+#include "ui/progresswnd.h"
+#include "ui/ui.h"
 
 #include "saves/ROMList.h"
 

@@ -8,7 +8,7 @@
 */
 
 #include "spinbox.h"
-#include "fontfactory.h"
+#include "../font/fontfactory.h"
 #include "ui.h"
 
 // #include "windowmanager.h"

@@ -12,7 +12,7 @@
 #include <string.h>
 #include "exptools.h"
 #include "language.h"
-#include "progresswnd.h"
+#include "ui/progresswnd.h"
 
 bool cSram::SaveFileName(const char* romName, char* saveName) {
     saveName[0] = 0;

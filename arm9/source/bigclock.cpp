@@ -12,7 +12,7 @@
 #include "inifile.h"
 #include "stringtool.h"
 #include "systemfilenames.h"
-#include "windowmanager.h"
+#include "ui/windowmanager.h"
 
 using namespace akui;
 

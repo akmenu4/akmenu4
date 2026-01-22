@@ -17,7 +17,7 @@
 
 #include "dbgtool.h"
 #include "gdi.h"
-#include "ui.h"
+#include "ui/ui.h"
 
 #include "mainlist.h"
 #include "mainwnd.h"
@@ -34,9 +34,9 @@
 #include "irqs.h"
 
 #include "diskicon.h"
-#include "fontfactory.h"
+#include "font/fontfactory.h"
 #include "language.h"
-#include "progresswnd.h"
+#include "ui/progresswnd.h"
 
 #include "exptools.h"
 #include "romlauncher.h"

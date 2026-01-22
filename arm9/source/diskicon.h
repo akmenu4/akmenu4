@@ -12,7 +12,7 @@
 #include <nds.h>
 #include "singleton.h"
 #include "sprite.h"
-#include "window.h"
+#include "ui/window.h"
 
 class cDiskIcon : public akui::cWindow {
   public:
