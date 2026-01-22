@@ -9,9 +9,9 @@
 
 #include "gdi.h"
 #include <font/fontfactory.h>
+#include <memtool.h>
 #include <cstdio>
 #include <cstring>
-#include "../../share/memtool.h"
 #include "dbgtool.h"
 #include "globalsettings.h"
 #include "sprite.h"

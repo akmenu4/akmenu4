@@ -8,8 +8,8 @@
 
 #include <nds.h>
 #include <string.h>
-#include "../../share/fifotool.h"
-#include "../../share/memtool.h"
+#include <fifotool.h>
+#include <memtool.h>
 
 #ifdef __cplusplus
 extern "C" {

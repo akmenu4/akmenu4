@@ -9,10 +9,10 @@
 
 #pragma once
 
+#include <fifotool.h>
 #include <nds.h>
 #include <singleton.h>
 #include <string>
-#include "../../share/fifotool.h"
 
 class cGlobalSettings {
   public:

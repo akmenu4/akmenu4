@@ -8,7 +8,7 @@
 */
 
 #include "bitmapdesc.h"
-#include "../../share/memtool.h"
+#include <memtool.h>
 #include "dbgtool.h"
 
 namespace akui {

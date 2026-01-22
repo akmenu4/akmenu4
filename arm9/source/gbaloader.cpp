@@ -9,13 +9,13 @@
 #include "gbaloader.h"
 #include <fat.h>
 #include <fcntl.h>
+#include <fifotool.h>
 #include <malloc.h>
 #include <nds.h>
 #include <stdio.h>
 #include <string.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include "../../share/fifotool.h"
 #include "exptools.h"
 #include "gbapatcher.h"
 #include "language.h"

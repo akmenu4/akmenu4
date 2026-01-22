@@ -8,8 +8,8 @@
 */
 
 #include "userwnd.h"
+#include <memtool.h>
 #include <sys/stat.h>
-#include "../../share/memtool.h"
 #include "globalsettings.h"
 #include "inifile.h"
 #include "stringtool.h"
