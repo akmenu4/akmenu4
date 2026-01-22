@@ -45,14 +45,6 @@
 
 using namespace akui;
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-void __libnds_exit(int rc) {}
-#ifdef __cplusplus
-}
-#endif
-
 int main(void) {
     irq().init();
 
