@@ -10,13 +10,13 @@
 #include <time.h>
 
 #include <sys/stat.h>
+#include "binaryfind.h"
 #include "cheatwnd.h"
 #include "gbaloader.h"
 #include "globalsettings.h"
 #include "language.h"
 #include "rominfownd.h"
 #include "systemfilenames.h"
-#include "ui/binaryfind.h"
 #include "ui/msgbox.h"
 #include "ui/uisettings.h"
 #include "ui/windowmanager.h"
