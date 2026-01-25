@@ -40,7 +40,7 @@ static u32 getSystem(void) {
     return dsGen;
 }
 
-static void prepairReset() {
+static void prepareReset() {
     // disble rtc irq, on some games enabled rtc irq caused tearing.
     uint8 command[2];
     command[0] = WRITE_STATUS_REG2;
@@ -100,7 +100,7 @@ static void menuValue32Handler(u32 value, void* data) {
             swiSwitchToGBAMode();
         } break;
         case MENU_MSG_ARM7_REBOOT:
-            prepairReset();
+            prepareReset();
             swiSoftReset();
             break;
         case MENU_MSG_BRIGHTNESS_NEXT:
