@@ -20,7 +20,7 @@ AUDIODIRS	:=
 # Defines passed to all files
 # ---------------------------
 
-PLATFORM	?=
+PLATFORM	?= default
 
 DEFINES		:= -D_NO_BOOTSTUB_
 
@@ -41,7 +41,7 @@ LIBDIRS		:= $(BLOCKSDS)/libs/libnds
 # Build artifacts
 # ---------------
 
-NAME		:= arm9
+NAME		:= arm9_$(PLATFORM)
 BUILDDIR	:= build/$(NAME)
 ELF		:= build/$(NAME).elf
 DUMP		:= build/$(NAME).dump

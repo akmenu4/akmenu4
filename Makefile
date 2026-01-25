@@ -56,10 +56,8 @@ ARM7DIR		:= arm7
 # --------------
 
 ROM		:= $(NAME).nds
-
-ifneq ($(PLATFORM),)
-ROM		:= $(NAME)_$(PLATFORM).nds
-endif
+ROM_AK2	:= $(NAME)_ak2.nds
+ROM_DSI	:= $(NAME).dsi
 
 # Targets
 # -------
@@ -75,7 +73,13 @@ clean:
 	$(V)$(RM) $(ROM) build $(SDIMAGE)
 
 arm9:
-	$(V)+$(MAKE) -f Makefile.arm9 PLATFORM=$(PLATFORM) --no-print-directory
+	$(V)+$(MAKE) -f Makefile.arm9 --no-print-directory
+
+arm9_ak2:
+	$(V)+$(MAKE) -f Makefile.arm9 PLATFORM=ak2 --no-print-directory
+
+arm9_dsi:
+	$(V)+$(MAKE) -f Makefile.arm9 PLATFORM=dsi --no-print-directory
 
 arm7:
 	$(V)+$(MAKE) -f Makefile.arm7 --no-print-directory
@@ -98,7 +102,21 @@ endif
 $(ROM): arm9 arm7
 	@echo "  NDSTOOL $@"
 	$(V)$(BLOCKSDS)/tools/ndstool/ndstool -c $@ \
-		-7 build/arm7.elf -9 build/arm9.elf \
+		-7 build/arm7.elf -9 build/arm9_default.elf \
+		-b $(GAME_ICON) "$(GAME_FULL_TITLE)" \
+		$(NDSTOOL_ARGS)
+
+$(ROM_AK2): arm9_ak2 arm7
+	@echo "  NDSTOOL $@"
+	$(V)$(BLOCKSDS)/tools/ndstool/ndstool -c $@ \
+		-7 build/arm7.elf -9 build/arm9_ak2.elf \
+		-b $(GAME_ICON) "$(GAME_FULL_TITLE)" \
+		$(NDSTOOL_ARGS)
+
+$(ROM_DSI): arm9_dsi arm7
+	@echo "  NDSTOOL $@"
+	$(V)$(BLOCKSDS)/tools/ndstool/ndstool -c $@ \
+		-7 build/arm7.elf -9 build/arm9_dsi.elf \
 		-b $(GAME_ICON) "$(GAME_FULL_TITLE)" \
 		$(NDSTOOL_ARGS)
 
