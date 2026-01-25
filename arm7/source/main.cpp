@@ -11,6 +11,8 @@
 #include <nds.h>
 #include <string.h>
 
+#include <picoLoader7.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -61,6 +63,22 @@ static void prepareReset() {
     swiDelay(1);
 }
 
+typedef void (*pico_loader_7_func_t)(void);
+static void picoLoaderStart() {
+    // Disable sound
+    disableSound();
+
+    // Disable all IRQs
+    irqDisable(IRQ_ALL);
+    REG_IME = IME_DISABLE;
+    REG_IE = 0;
+    REG_IF = ~0;
+
+    // Reset
+    pload_header7_t* header7 = (pload_header7_t*)0x06000000;
+    ((pico_loader_7_func_t)header7->entryPoint)();
+}
+
 static void brightnessNext(void) {
     u8 data = readPowerManagement(PM_NDSLITE_ADR);
     if (0 == (data & PM_NDSLITE_ISLITE))  // this is not a DS Lite machine
@@ -99,6 +117,9 @@ static void menuValue32Handler(u32 value, void* data) {
             swiChangeSoundBias(0, 0x400);
             swiSwitchToGBAMode();
         } break;
+        case MENU_MSG_ARM7_REBOOT_PICO:
+            picoLoaderStart();
+            break;
         case MENU_MSG_ARM7_REBOOT:
             prepareReset();
             swiSoftReset();
