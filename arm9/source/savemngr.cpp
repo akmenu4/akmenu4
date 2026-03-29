@@ -169,7 +169,7 @@ bool cSaveManager::clearLastInfo() {
 bool cSaveManager::initializeSaveFile(const std::string& romFilename, u8 slot, u32 size) {
     bool res = false;
     std::string saveFilename = generateSaveName(romFilename, slot);
-    int f = open(saveFilename.c_str(), O_WRONLY | O_CREAT);
+    int f = open(saveFilename.c_str(), O_WRONLY | O_CREAT | O_APPEND);
     if (f >= 0) {
         off_t filesize = lseek(f, 0, SEEK_END);
         if (filesize >= 0) {
@@ -201,6 +201,10 @@ bool cSaveManager::initializeSaveFile(const std::string& romFilename, u8 slot, u
             }
         }
         close(f);
+    } else {
+        std::string errormsg = "open failed err" + std::to_string(errno);
+        messageBox(NULL, "help", errormsg.c_str(), MB_OK);
+        messageBox(NULL, "attempted to open", saveFilename.c_str(), MB_OK);
     }
     return res;
 }
