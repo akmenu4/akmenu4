@@ -2,3 +2,6 @@
 	path = DLDI
 	url = https://github.com/DS-Homebrew/DLDI
 	branch = builds
+[submodule "tools/bdftopcf"]
+	path = tools/bdftopcf
+	url = https://gitlab.freedesktop.org/xorg/util/bdftopcf
