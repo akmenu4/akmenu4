@@ -17,12 +17,8 @@
 #include "ui/touchmessage.h"
 #include "zoomingicon.h"
 
-#ifndef __DSIMODE__
-#define SD_ROOT_0 "fat:"
-#else
-#define SD_ROOT_0 "sd:"
-#endif
-#define SD_ROOT SD_ROOT_0 "/"
+#define SD_ROOT_0 "fat:/"
+#define SD_ROOT_1 "sd:/"
 
 // 显示游戏列表，文件列表等等
 class cMainList : public akui::cListView {
@@ -121,6 +117,7 @@ class cMainList : public akui::cListView {
     u32 _topCount;
     u32 _topuSD;
     u32 _topSlot2;
+    u32 _topdsiSD;
     u32 _topFavorites;
 
   public:

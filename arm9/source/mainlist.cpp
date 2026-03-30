@@ -34,10 +34,11 @@ using namespace akui;
 cMainList::cMainList(s32 x, s32 y, u32 w, u32 h, cWindow* parent, const std::string& text)
     : cListView(x, y, w, h, parent, text),
       _showAllFiles(false),
-      _topCount(3),
+      _topCount(4),
       _topuSD(0),
       _topSlot2(1),
-      _topFavorites(2) {
+      _topdsiSD(2),
+      _topFavorites(3) {
     _viewMode = VM_LIST;
     _activeIconScale = 1;
     _activeIcon.hide();
@@ -49,9 +50,16 @@ cMainList::cMainList(s32 x, s32 y, u32 w, u32 h, cWindow* parent, const std::str
     u32 system = fifoGetValue32(FIFO_USER_02);
     if (2 == system)  // dsi
     {
-        _topCount = 2;
-        _topSlot2 = 2;
-        _topFavorites = 1;
+        _topCount = 3;
+        _topSlot2 = 3;
+        _topdsiSD = 1;
+        _topFavorites = 2;
+    }
+    else // not dsi
+    {
+        _topCount = 3;
+        _topdsiSD = 3;
+        _topFavorites = 2;
     }
 }
 
@@ -119,7 +127,12 @@ bool cMainList::enterDir(const std::string& dirName) {
             if (_topuSD == i) {
                 a_row.push_back(LANG("mainlist", "microsd card"));
                 a_row.push_back("");
-                a_row.push_back(SD_ROOT);
+                a_row.push_back(SD_ROOT_0);
+                rominfo.setBanner("usd", microsd_banner_bin);
+            } else if (_topdsiSD == i) {
+                a_row.push_back(LANG("mainlist", "dsi sd card"));
+                a_row.push_back("");
+                a_row.push_back(SD_ROOT_1);
                 rominfo.setBanner("usd", microsd_banner_bin);
             } else if (_topSlot2 == i) {
                 a_row.push_back(LANG("mainlist", "slot2 card"));
@@ -154,7 +167,7 @@ bool cMainList::enterDir(const std::string& dirName) {
         dir = opendir(dirName.c_str());
 
         if (dir == NULL) {
-            if (SD_ROOT == dirName) {
+            if (SD_ROOT_0 == dirName || SD_ROOT_1 == dirName) {
                 std::string title = LANG("sd card error", "title");
                 std::string sdError = LANG("sd card error", "text");
                 messageBox(NULL, title, sdError, MB_OK);
@@ -317,11 +330,12 @@ void cMainList::onScrolled(u32 index) {
 void cMainList::backParentDir() {
     if ("..." == _currentDir) return;
 
-    bool fat1 = (SD_ROOT == _currentDir), favorites = ("favorites:/" == _currentDir);
-    if ("fat:/" == _currentDir || "sd:/" == _currentDir || fat1 || favorites ||
+    bool fat1 = (SD_ROOT_0 == _currentDir), fat2 = (SD_ROOT_1 == _currentDir), favorites = ("favorites:/" == _currentDir);
+    if ("fat:/" == _currentDir || "sd:/" == _currentDir || fat1 || fat2 || favorites ||
         "/" == _currentDir) {
         enterDir("...");
         if (fat1) selectRow(_topuSD);
+        if (fat2) selectRow(_topdsiSD);
         if (favorites) selectRow(_topFavorites);
         return;
     }
