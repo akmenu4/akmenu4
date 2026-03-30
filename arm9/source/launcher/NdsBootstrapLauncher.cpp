@@ -38,8 +38,8 @@ bool NdsBootstrapLauncher::prepareCheats() {
             cCheatWnd chtwnd((256) / 2, (192) / 2, 100, 100, NULL, mRomPath);
 
             chtwnd.parse(mRomPath);
-            chtwnd.writeCheatsToFile("/_nds/nds-bootstrap/cheatData.bin");
-            FILE* cheatData = fopen("/_nds/nds-bootstrap/cheatData.bin", "rb");
+            chtwnd.writeCheatsToFile(SFN_NDS_BOOTSTRAP_CHEATDATA);
+            FILE* cheatData = fopen(SFN_NDS_BOOTSTRAP_CHEATDATA, "rb");
             if (cheatData) {
                 u32 check[2];
                 fread(check, 1, 8, cheatData);
@@ -58,8 +58,8 @@ bool NdsBootstrapLauncher::prepareCheats() {
 
 cheat_failed:
     // Remove cheat bin if exists
-    if (access("/_nds/nds-bootstrap/cheatData.bin", F_OK) == 0) {
-        remove("/_nds/nds-bootstrap/cheatData.bin");
+    if (access(SFN_NDS_BOOTSTRAP_CHEATDATA, F_OK) == 0) {
+        remove(SFN_NDS_BOOTSTRAP_CHEATDATA);
     }
 
     return false;
@@ -70,13 +70,13 @@ bool NdsBootstrapLauncher::prepareIni() {
     ini.SetString("NDS-BOOTSTRAP", "NDS_PATH", mRomPath);
     ini.SetString("NDS-BOOTSTRAP", "SAV_PATH", mSavePath);
 
-    ini.SaveIniFile("/_nds/nds-bootstrap.ini");
+    ini.SaveIniFile(SFN_NDS_BOOTSTRAP_INI);
     return true;
 }
 
 bool NdsBootstrapLauncher::launchRom(std::string romPath, std::string savePath, u32 flags,
                                      u32 cheatOffset, u32 cheatSize) {
-    const char ndsBootstrapPath[] = SD_ROOT_0 "/_nds/nds-bootstrap-release.nds";
+    const char ndsBootstrapPath[] = SFN_NDS_BOOTSTRAP_EXEC;
 
     progressWnd().setTipText(LANG("progress window", "init nds-bootstrap"));
     progressWnd().show();
@@ -95,8 +95,8 @@ bool NdsBootstrapLauncher::launchRom(std::string romPath, std::string savePath, 
     mFlags = flags;
 
     // Create the nds-bootstrap directory if it doesn't exist
-    if (access("/_nds/nds-bootstrap/", F_OK) != 0) {
-        mkdir("/_nds/nds-bootstrap/", 0777);
+    if (access(SFN_NDS_BOOTSTRAP_DIR, F_OK) != 0) {
+        mkdir(SFN_NDS_BOOTSTRAP_DIR, 0777);
     }
 
     progressWnd().setPercent(33);
