@@ -25,6 +25,8 @@ gba load = Loading gba game
 gba save load = Loading gba save
 gba save store = Processing gba save, dont power off
 erase nor = Erase NOR flash
+init nds-bootstrap = Initializing nds-bootstrap
+init nds-bootstrap cheats = Loading cheats
 
 [language changed]
 title = Question
