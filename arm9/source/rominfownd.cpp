@@ -410,7 +410,7 @@ void cRomInfoWnd::pressSaveType(void) {
             settingWnd.getItemSelection(ITEM_RUMBLE), 0,
             settingWnd.getItemSelection(ITEM_SOFTRESET), settingWnd.getItemSelection(ITEM_CHEATS),
             settingWnd.getItemSelection(ITEM_SAVESLOT), 2, 0,
-            settingWnd.getItemSelection(ITEM_LINKAGE), settingWnd.getItemSelection(ITEM_ICON), 2,
+            settingWnd.getItemSelection(ITEM_LINKAGE), settingWnd.getItemSelection(ITEM_ICON),
             settingWnd.getItemSelection(ITEM_LANGUAGE),
             settingWnd.getItemSelection(ITEM_NDSBOOTSTRAP));
 

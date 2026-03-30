@@ -104,7 +104,6 @@ typedef struct SAVE_INFO_EX_T {
     u8 getProtection(void) { return (flags2 & SAVE_INFO_EX_PROTECTION) ? 1 : 0; };
     u8 getLinkage(void) { return (flags2 & SAVE_INFO_EX_LINKAGE) ? 1 : 0; };
     u8 getIcon(void) { return (flags2 & SAVE_INFO_EX_ICON_MASK) >> SAVE_INFO_EX_ICON_SHIFT; };
-    u8 getSDSave(void) { return getFlag(SAVE_INFO_EX_SD_SAVE, SAVE_INFO_EX_GLOBAL_SD_SAVE, true); };
     u8 getLanguage(void) {
         return (flags2 & SAVE_INFO_EX_LANGUAGE_MASK) >> SAVE_INFO_EX_LANGUAGE_SHIFT;
     }
@@ -127,15 +126,12 @@ typedef struct SAVE_INFO_EX_T {
     };
     bool isProtection(void) { return (flags2 & SAVE_INFO_EX_PROTECTION) ? true : false; };
     bool isLinkage(void) { return (flags2 & SAVE_INFO_EX_LINKAGE) ? true : false; };
-    bool isSDSave(void) {
-        return getState(SAVE_INFO_EX_SD_SAVE, SAVE_INFO_EX_GLOBAL_SD_SAVE, gs().sdsave, true);
-    };
     bool isNdsBootstrap(void) {
         return getState(SAVE_INFO_EX_NDSBOOTSTRAP, SAVE_INFO_EX_GLOBAL_NDSBOOTSTRAP,
                         gs().romLauncher, true);
     };
     void setFlags(u8 rumble, u8 downloadplay, u8 reset, u8 cheat, u8 slot, u8 dma, u8 protection,
-                  u8 linkage, u8 icon, u8 sdsave, u8 language, u8 ndsbootstrap) {
+                  u8 linkage, u8 icon, u8 language, u8 ndsbootstrap) {
         flags = rumble & SAVE_INFO_EX_RUMBLE;
         flags2 = 0;
         setFlag(SAVE_INFO_EX_DOWNLOAD_PLAY, SAVE_INFO_EX_GLOBAL_DOWNLOAD_PLAY, downloadplay, false);
@@ -146,7 +142,6 @@ typedef struct SAVE_INFO_EX_T {
         flags2 |= (protection ? SAVE_INFO_EX_PROTECTION : 0);
         flags2 |= (linkage ? SAVE_INFO_EX_LINKAGE : 0);
         flags2 |= (icon << SAVE_INFO_EX_ICON_SHIFT) & SAVE_INFO_EX_ICON_MASK;
-        setFlag(SAVE_INFO_EX_SD_SAVE, SAVE_INFO_EX_GLOBAL_SD_SAVE, sdsave, true);
         flags2 |= (language << SAVE_INFO_EX_LANGUAGE_SHIFT) & SAVE_INFO_EX_LANGUAGE_MASK;
         setFlag(SAVE_INFO_EX_NDSBOOTSTRAP, SAVE_INFO_EX_GLOBAL_NDSBOOTSTRAP, ndsbootstrap, true);
     };

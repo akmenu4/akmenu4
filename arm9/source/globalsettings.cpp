@@ -33,7 +33,6 @@ cGlobalSettings::cGlobalSettings() {
     cheats = false;
     softreset = true;
     dma = true;
-    sdsave = true;
     cheatDB = false;
     slot2mode = ESlot2Ask;
     saveExt = true;
@@ -65,7 +64,6 @@ void cGlobalSettings::loadSettings() {
     cheats = ini.GetInt("system", "cheats", cheats);
     softreset = ini.GetInt("system", "softreset", softreset);
     dma = ini.GetInt("system", "dma", dma);
-    sdsave = ini.GetInt("system", "sdsave", sdsave);
     safeMode = ini.GetInt("system", "safemode", safeMode);
     show12hrClock = ini.GetInt("system", "Show12hrClock", show12hrClock);
     autorunWithLastRom = ini.GetInt("system", "autorunWithLastRom", autorunWithLastRom);
@@ -112,7 +110,6 @@ void cGlobalSettings::saveSettings() {
     ini.SetInt("system", "cheats", cheats);
     ini.SetInt("system", "softreset", softreset);
     ini.SetInt("system", "dma", dma);
-    ini.SetInt("system", "sdsave", sdsave);
     ini.SetInt("system", "safemode", safeMode);
     ini.SetInt("system", "Show12hrClock", show12hrClock);
     ini.SetInt("system", "homebrewreset", homebrewreset);
