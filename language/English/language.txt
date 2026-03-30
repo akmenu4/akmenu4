@@ -21,48 +21,10 @@ cancel = Cancel
 
 [progress window]
 processing save = Processing, dont power off
-processing copy = Copying file, dont power off, %c for cancel
-first use sd = Checking SD card for the first time using
 gba load = Loading gba game
 gba save load = Loading gba save
 gba save store = Processing gba save, dont power off
 erase nor = Erase NOR flash
-
-[copy file error]
-title = Error
-text = File does not exist
-
-[copy file exists]
-title = Warning
-text = A file with the same name already exists, replace it?
-
-[copy dest is directory]
-title = Error
-text = A directory with the same name already exists, can not copy source file.
-
-[move dest is directory]
-title = Error
-text = A directory with the same name already exists, can not move source file.
-
-[no copy dir]
-title = Error
-text = Directory copying/moving is not supported for now.
-
-[stop copying file]
-title = Stop copying file
-text = Do you want to stop copying?
-
-[confirm delete file]
-title = Confirm
-text = File can not be recovered after delete, continue delete "%s"?
-
-[do not delete directory]
-title = Warning
-text = The directory is not empty, can not delete it.
-
-[restore save fail]
-title = Error
-text = Failed to restore save data.
 
 [language changed]
 title = Question
@@ -126,17 +88,9 @@ free = Free Space: %s
 title = Error
 text = There is not enough space on the disk.
 
-[unsupported sd]
-title = Unsupported SD card
-text = This SD card(Model:%s) is not suitable for running offical DS programs, please copy program from SD card to Acekard Internal Flash Memory and try again.
-
 [sd card error]
 title = SD card error
 text = Can not access sd card, it may not be inserted correctly.
-
-[no sd for save]
-title = SD card error
-text = Can not access sd card, save data of previous launched program will be written to file: "%s".
 
 [no gba card]
 title = Notify
@@ -190,10 +144,6 @@ strength = Rumble strength
 flash to nor = to NOR
 copy to psram = to RAM
 
-[abort save]
-title = Abort save processing
-text = Do you want abort save processing?
-
 [gba warn]
 title = Warning
 text = Gba roms with size more then 32M don't support!
@@ -212,10 +162,6 @@ homebrew reset = Reset in Homebrew
 Enable = on
 Disable = off
 Global = global(%s)
-
-[ram allocation]
-title = Error
-memory allocation error = Memory allocation error
 
 [scrolling]
 fast = Fast
@@ -246,10 +192,6 @@ modegba = gba
 modends = nds
 modeask = ask
 modetext = Launch slot-2 in NDS mode?
-
-[sd save]
-title = Warning
-text = This game cannot be launched from Acekard Internal Flash Memory, please copy game from Acekard Internal Flash Memory to SD card and try again.
 
 [icon]
 icon = Show icon
