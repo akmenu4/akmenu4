@@ -214,6 +214,7 @@ target slot = Target Save Slot
 [mainlist]
 flash memory = Flash Memory
 microsd card = microSD Card
+dsi sd card = DSi / 3DS SD Card
 slot2 card = Slot2 Card
 favorites = Favorites
 
