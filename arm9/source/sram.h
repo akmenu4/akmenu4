@@ -24,8 +24,8 @@ class cSram {
         u32 offset;
         u32 size;
         u32 header;
-        sSaveInfo() : marker(SAVE_GBA_HEADER_MAGIC), offset(0), size(SRAM_SAVE_SIZE), header(0){};
-        sSaveInfo(u32 aSize) : marker(SAVE_GBA_HEADER_MAGIC), offset(0), size(aSize), header(0){};
+        sSaveInfo() : marker(SAVE_GBA_HEADER_MAGIC), offset(0), size(SRAM_SAVE_SIZE), header(0) {};
+        sSaveInfo(u32 aSize) : marker(SAVE_GBA_HEADER_MAGIC), offset(0), size(aSize), header(0) {};
     };
 
   public:

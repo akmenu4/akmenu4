@@ -68,7 +68,7 @@ class cListView : public cWindow {
               _textY(textY),
               _textHeight(textHeight),
               _text(text),
-              _engine(engine){};
+              _engine(engine) {};
     };
 
   public:

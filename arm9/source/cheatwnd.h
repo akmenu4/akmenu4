@@ -67,7 +67,7 @@ class cCheatWnd : public akui::cForm {
         u32 _flags;
         u32 _offset;
         cParsedItem(const std::string& title, const std::string& comment, u32 flags, u32 offset = 0)
-            : _title(title), _comment(comment), _flags(flags), _offset(offset){};
+            : _title(title), _comment(comment), _flags(flags), _offset(offset) {};
         enum { EFolder = 1, EInFolder = 2, EOne = 4, ESelected = 8, EOpen = 16 };
     };
     enum {

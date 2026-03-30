@@ -129,25 +129,21 @@ class cWindow : public SlotHolder {
 
     //! \brief called when the window is hidden, derived classes can override this to
     //! react to the window being hidden
-    virtual void onHide() { /*dbg_printf("%s default onHide()\n", _text.c_str() );*/
-    }
+    virtual void onHide() { /*dbg_printf("%s default onHide()\n", _text.c_str() );*/ }
 
     //! Called when the window receives the focus
-    virtual void onGainedFocus() { /*dbg_printf("%s get FOCUS\n", _text.c_str() );*/
-    }
+    virtual void onGainedFocus() { /*dbg_printf("%s get FOCUS\n", _text.c_str() );*/ }
 
     //! Called when the window loses the focus
     virtual void onLostFocus() { dbg_printf("%s lost FOCUS\n", _text.c_str()); }
 
     //! \brief called when the window is resized, derived classes can override this to
     //! react to the window size changing
-    virtual void onResize() { /*dbg_printf("%s on resize\n", _text.c_str() );*/
-    }
+    virtual void onResize() { /*dbg_printf("%s on resize\n", _text.c_str() );*/ }
 
     //! \brief called when the window is moved, derived classes can override this to
     //! react to the window position changing
-    virtual void onMove() { /*dbg_printf("%s on move\n", _text.c_str() ); */
-    }
+    virtual void onMove() { /*dbg_printf("%s on move\n", _text.c_str() ); */ }
 
     //! \brief called when the window text changes, derived classes can override this to
     //! react to the window text changing

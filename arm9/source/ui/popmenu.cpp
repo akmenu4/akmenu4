@@ -7,11 +7,11 @@
     SPDX-License-Identifier: GPL-3.0-or-later
 */
 
-//�
+// �
 
 #include "popmenu.h"
 #include "ui.h"
-//#include "windowmanager.h"
+// #include "windowmanager.h"
 
 namespace akui {
 

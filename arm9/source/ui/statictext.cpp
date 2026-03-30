@@ -9,7 +9,7 @@
 
 #include "statictext.h"
 #include "ui.h"
-//#include "gdi.h"
+// #include "gdi.h"
 
 namespace akui {
 

@@ -15,7 +15,7 @@
 
 #include "font.h"
 
-//#define SMALL 1
+// #define SMALL 1
 
 class cFontPcf : public cFont {
   private:

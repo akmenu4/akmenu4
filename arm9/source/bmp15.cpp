@@ -7,7 +7,7 @@
     SPDX-License-Identifier: GPL-3.0-or-later
 */
 
-//�
+// �
 
 #include "bmp15.h"
 #include <list>

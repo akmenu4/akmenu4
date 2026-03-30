@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//#define DEBUG
+// #define DEBUG
 
 #ifdef DEBUG
 static inline int dbg_printf(const char* format, ...) {

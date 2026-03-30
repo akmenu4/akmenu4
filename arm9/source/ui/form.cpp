@@ -10,8 +10,8 @@
 #include "form.h"
 #include "timer.h"
 #include "ui.h"
-//#include "dbgtool.h"
-//#include "windowmanager.h"
+// #include "dbgtool.h"
+// #include "windowmanager.h"
 
 namespace akui {
 

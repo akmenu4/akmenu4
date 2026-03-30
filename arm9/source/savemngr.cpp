@@ -7,7 +7,7 @@
     SPDX-License-Identifier: GPL-3.0-or-later
 */
 
-//�
+// �
 
 #include "savemngr.h"
 #include <fat.h>

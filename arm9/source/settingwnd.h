@@ -42,13 +42,13 @@ class cSettingWnd : public akui::cForm {
     struct sSetingItem {
         akui::cStaticText* _label;
         akui::cSpinBox* _item;
-        sSetingItem(akui::cStaticText* label, akui::cSpinBox* item) : _label(label), _item(item){};
+        sSetingItem(akui::cStaticText* label, akui::cSpinBox* item) : _label(label), _item(item) {};
     };
     struct sSetingTab {
         std::vector<sSetingItem>* _tab;
         std::string _title;
         sSetingTab(std::vector<sSetingItem>* tab, const std::string& title)
-            : _tab(tab), _title(title){};
+            : _tab(tab), _title(title) {};
     };
 
   protected:

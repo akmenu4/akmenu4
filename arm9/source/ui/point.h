@@ -38,13 +38,13 @@ class t_point {
         x = p.x, y = p.y;
         return *this;
     }
-    //当前点是否在p的左侧
+    // 当前点是否在p的左侧
     bool is_left(const t_point& p) const { return x < p.x; }  // 是否在点的左边
-    //当前点是否在p的右侧
+    // 当前点是否在p的右侧
     bool is_right(const t_point& p) const { return x > p.x; }  // 是否在点的右边
-    //当前点是否在p的上方
+    // 当前点是否在p的上方
     bool is_up(const t_point& p) const { return y < p.y; }  // 是否在点的上边
-    //当前点是否在p的下方
+    // 当前点是否在p的下方
     bool is_down(const t_point& p) const { return y > p.y; }  // 是否在点的下边
     t_point& operator()(value_type x_, value_type y_) {
         x = x_;

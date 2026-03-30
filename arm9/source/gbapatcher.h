@@ -132,7 +132,5 @@ class CGbaPatcher {
   public:
     CGbaPatcher(u32 aSize, CGbaWriter* aWriter, u32* aData, u8 aRamPage);
     u32 Patch(void);
-    inline u32 ResultSize(void) {
-        return iResultSize;
-    };
+    inline u32 ResultSize(void) { return iResultSize; };
 };

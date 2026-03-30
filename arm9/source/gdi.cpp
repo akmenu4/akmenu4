@@ -367,9 +367,9 @@ void cGdi::bitBlt(const void* src, s16 srcW, s16 srcH, s16 destX, s16 destY, u16
     u16* pDest = NULL;
 
     if (GE_MAIN == engine)
-        pDest = _bufferMain2 + (destY)*256 + destX + _layerPitch;
+        pDest = _bufferMain2 + (destY) * 256 + destX + _layerPitch;
     else
-        pDest = _bufferSub2 + (destY)*256 + destX;
+        pDest = _bufferSub2 + (destY) * 256 + destX;
 
     bool destAligned = !(destX & 1);
 
@@ -400,9 +400,9 @@ void cGdi::bitBlt(const void* src, s16 destX, s16 destY, u16 destW, u16 destH,
     u16* pDest = NULL;
 
     if (GE_MAIN == engine)
-        pDest = _bufferMain2 + (destY)*256 + destX + _layerPitch;
+        pDest = _bufferMain2 + (destY) * 256 + destX + _layerPitch;
     else
-        pDest = _bufferSub2 + (destY)*256 + destX;
+        pDest = _bufferSub2 + (destY) * 256 + destX;
 
     u16 pitchPixel = (destW + (destW & 1));
     u16 destInc = 256 - pitchPixel;
@@ -427,9 +427,9 @@ void cGdi::maskBlt(const void* src, s16 destX, s16 destY, u16 destW, u16 destH,
     bool destAligned = !(destX & 1);
 
     if (GE_MAIN == engine)
-        pDest = _bufferMain2 + (destY)*256 + destX + _layerPitch;
+        pDest = _bufferMain2 + (destY) * 256 + destX + _layerPitch;
     else
-        pDest = _bufferSub2 + (destY)*256 + destX;
+        pDest = _bufferSub2 + (destY) * 256 + destX;
 
     u16 pitch = (destW + (destW & 1));
     u16 destInc = 256 - pitch;
@@ -472,9 +472,9 @@ void cGdi::maskBlt(const void* src, s16 srcW, s16 srcH, s16 destX, s16 destY, u1
     u16* pDest = NULL;
 
     if (GE_MAIN == engine)
-        pDest = _bufferMain2 + (destY)*256 + destX + _layerPitch;
+        pDest = _bufferMain2 + (destY) * 256 + destX + _layerPitch;
     else
-        pDest = _bufferSub2 + (destY)*256 + destX;
+        pDest = _bufferSub2 + (destY) * 256 + destX;
 
     bool destAligned = !(destX & 1);
 

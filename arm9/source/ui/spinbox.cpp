@@ -11,7 +11,7 @@
 #include "fontfactory.h"
 #include "ui.h"
 
-//#include "windowmanager.h"
+// #include "windowmanager.h"
 
 namespace akui {
 

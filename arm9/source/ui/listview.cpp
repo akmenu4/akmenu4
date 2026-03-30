@@ -7,12 +7,12 @@
     SPDX-License-Identifier: GPL-3.0-or-later
 */
 
-//�
+// �
 
 #include "listview.h"
 #include "ui.h"
-//#include "gdi.h"
-//#include "dbgtool.h"
+// #include "gdi.h"
+// #include "dbgtool.h"
 
 namespace akui {
 

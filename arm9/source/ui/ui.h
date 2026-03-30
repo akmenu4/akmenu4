@@ -39,8 +39,8 @@
 #include "formdesc.h"
 #include "spinbox.h"
 
-//#include "progressbar.h"
-//#include "progresswnd.h"
+// #include "progressbar.h"
+// #include "progresswnd.h"
 
 #include "msgbox.h"
 #include "popmenu.h"

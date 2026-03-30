@@ -10,7 +10,7 @@
 #include "formdesc.h"
 #include "ui.h"
 
-//#include "globalsettings.h"
+// #include "globalsettings.h"
 
 namespace akui {
 

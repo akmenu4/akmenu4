@@ -15,7 +15,7 @@
 
 class cFileIconItem {
   public:
-    cFileIconItem() : _loaded(false){};
+    cFileIconItem() : _loaded(false) {};
     cFileIconItem(const std::string& aFolderName, const std::string& aFileName);
     const std::string& FileName(void) const { return _filename; };
     const std::string& FolderName(void) const { return _foldername; };

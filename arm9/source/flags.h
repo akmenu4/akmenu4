@@ -23,4 +23,4 @@
 #define PATCH_SAVE_NO 0x1f
 #define PATCH_LANGUAGE_MASK 0x0000e000
 #define PATCH_LANGUAGE_SHIFT 13
-//#define PATCH_NEXT          BIT(16)
+// #define PATCH_NEXT          BIT(16)

@@ -35,8 +35,7 @@ static void resetAndLoop() {
     REG_IF = ~0;
 
     // wait for arm7
-    while (*((vu32*)0x02FFFE04) == 0)
-        ;
+    while (*((vu32*)0x02FFFE04) == 0);
     swiSoftReset();
 }
 

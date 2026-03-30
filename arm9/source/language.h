@@ -23,7 +23,7 @@ class cLanguageFile : public CIniFile {
         m_bReadOnly = true;
         LoadIniFile(SFN_LANGUAGE_TEXT);
     }
-    ~cLanguageFile(){};
+    ~cLanguageFile() {};
 };
 
 typedef t_singleton<cLanguageFile> languageFile_s;
