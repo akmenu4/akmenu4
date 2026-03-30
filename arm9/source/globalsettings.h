@@ -39,7 +39,6 @@ class cGlobalSettings {
     u8 brightness;
     u8 language;
     u8 fileListType;
-    u8 romTrim;
     std::string langDirectory;
     std::string uiName;
     std::string startupFolder;

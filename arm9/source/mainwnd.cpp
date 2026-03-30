@@ -519,7 +519,6 @@ void cMainWnd::setParam(void) {
     _values.push_back(LANG("switches", "Enable"));
     settingWnd.addSettingItem(LANG("file settings", "show hidden files"), _values,
                               gs().showHiddenFiles);
-    settingWnd.addSettingItem(LANG("rom trim", "text"), _values, gs().romTrim);
     _values.clear();
     _values.push_back(".nds.sav");
     _values.push_back(".sav");
@@ -580,8 +579,7 @@ void cMainWnd::setParam(void) {
 
     // page 3: filesystem
     gs().showHiddenFiles = settingWnd.getItemSelection(2, 0);
-    gs().romTrim = settingWnd.getItemSelection(2, 1);
-    gs().saveExt = settingWnd.getItemSelection(2, 2);
+    gs().saveExt = settingWnd.getItemSelection(2, 1);
 
     // page 4: patches
     gs().cheats = settingWnd.getItemSelection(3, 0);

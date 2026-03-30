@@ -22,7 +22,6 @@ cGlobalSettings::cGlobalSettings() {
     uiName = "zelda";
     startupFolder = "...";
     fileListType = 0;
-    romTrim = 0;
     showHiddenFiles = false;
     enterLastDirWhenBoot = true;
     scrollSpeed = EScrollFast;
@@ -58,7 +57,6 @@ void cGlobalSettings::loadSettings() {
     startupFolder = ini.GetString("system", "startupFolder", startupFolder);
     if ('/' != startupFolder[startupFolder.length() - 1]) startupFolder += '/';
     fileListType = ini.GetInt("system", "fileListType", fileListType);
-    romTrim = ini.GetInt("system", "romTrim", romTrim);
     showHiddenFiles = ini.GetInt("system", "showHiddenFiles", showHiddenFiles);
     enterLastDirWhenBoot = ini.GetInt("system", "enterLastDirWhenBoot", enterLastDirWhenBoot);
     gbaSleepHack = ini.GetInt("system", "gbaSleepHack", gbaSleepHack);
@@ -107,7 +105,6 @@ void cGlobalSettings::saveSettings() {
     ini.SetString("system", "uiName", uiName);
     ini.SetString("system", "langDirectory", langDirectory);
     ini.SetInt("system", "fileListType", fileListType);
-    ini.SetInt("system", "romTrim", romTrim);
     ini.SetInt("system", "showHiddenFiles", showHiddenFiles);
     ini.SetInt("system", "gbaSleepHack", gbaSleepHack);
     ini.SetInt("system", "gbaAutoSave", gbaAutoSave);
