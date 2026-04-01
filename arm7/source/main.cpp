@@ -65,9 +65,6 @@ static void prepareReset() {
 
 typedef void (*pico_loader_7_func_t)(void);
 static void picoLoaderStart() {
-    // Disable sound
-    disableSound();
-
     // Disable all IRQs
     irqDisable(IRQ_ALL);
     REG_IME = IME_DISABLE;
