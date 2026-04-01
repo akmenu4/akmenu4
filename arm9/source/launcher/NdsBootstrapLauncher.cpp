@@ -13,7 +13,7 @@
 
 #include <nds/ndstypes.h>
 
-#include "../cheatwnd.h"
+#include <cheat.h>
 #include "../dsrom.h"
 #include "../flags.h"
 #include "../inifile.h"
@@ -29,16 +29,15 @@
 bool NdsBootstrapLauncher::prepareCheats() {
     u32 gameCode, crc32;
 
-    if (cCheatWnd::romData(mRomPath, gameCode, crc32)) {
+    if (cCheat::romData(mRomPath, gameCode, crc32)) {
         FILE* cheatDb = fopen(SFN_CHEATS, "rb");
         if (!cheatDb) goto cheat_failed;
         long cheatOffset;
         size_t cheatSize;
-        if (cCheatWnd::searchCheatData(cheatDb, gameCode, crc32, cheatOffset, cheatSize)) {
-            cCheatWnd chtwnd((256) / 2, (192) / 2, 100, 100, NULL, mRomPath);
-
-            chtwnd.parse(mRomPath);
-            chtwnd.writeCheatsToFile(SFN_NDS_BOOTSTRAP_CHEATDATA);
+        if (cCheat::searchCheatData(cheatDb, gameCode, crc32, cheatOffset, cheatSize)) {
+            cCheat cheat;
+            cheat.parse(mRomPath);
+            cheat.writeCheatsToFile(SFN_NDS_BOOTSTRAP_CHEATDATA);
             FILE* cheatData = fopen(SFN_NDS_BOOTSTRAP_CHEATDATA, "rb");
             if (cheatData) {
                 u32 check[2];
