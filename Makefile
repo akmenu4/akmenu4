@@ -8,7 +8,7 @@ BLOCKSDSEXT	?= /opt/blocksds/external
 # User config
 # ===========
 
-NAME		:= $(shell basename $(CURDIR))
+NAME		:= akmenu4
 
 PLATFORM	?=
 
