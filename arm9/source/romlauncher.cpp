@@ -213,6 +213,7 @@ TLaunchResult launchRom(const std::string& aFullPath, DSRomInfo& aRomInfo, bool 
                 expansion().SoftReset();
                 cExpansion::SetShake(0xEF + aRomInfo.saveInfo().getRumble());
             }
+            if (expansion().Rampage() == cExpansion::EPsramPage) flags |= PATCH_PSRAM;
         }
         if (aRomInfo.saveInfo().isDownloadPlay()) flags |= PATCH_DOWNLOAD_PLAY;
         if (aRomInfo.saveInfo().isCheat()) {
@@ -228,7 +229,6 @@ TLaunchResult launchRom(const std::string& aFullPath, DSRomInfo& aRomInfo, bool 
             }
         }
         if (aRomInfo.saveInfo().isSoftReset()) flags |= PATCH_SOFT_RESET;
-        if (expansion().Rampage() == cExpansion::EPsramPage) flags |= PATCH_PSRAM;
         if (aRomInfo.saveInfo().isLinkage()) flags |= PATCH_LINKAGE;
         u8 language = aRomInfo.saveInfo().getLanguage();
         if (language) flags |= (language << PATCH_LANGUAGE_SHIFT) & PATCH_LANGUAGE_MASK;
