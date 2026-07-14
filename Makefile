@@ -59,6 +59,7 @@ ROM			:= $(NAME).nds
 ROM_AK2		:= $(NAME)_ak2.nds
 ROM_DSI		:= $(NAME).dsi
 ROM_PICO	:= $(NAME)_pico.nds
+BOOTLOADER	:= $(CURDIR)/data/load.bin
 
 # Targets
 # -------
@@ -72,17 +73,22 @@ clean:
 	$(V)$(MAKE) -f Makefile.arm9 clean --no-print-directory
 	$(V)$(MAKE) -f Makefile.arm7 clean --no-print-directory
 	$(V)$(RM) $(ROM) build $(SDIMAGE)
+	$(V)$(RM) -rf data
 
-arm9:
+$(BOOTLOADER):
+	$(MKDIR) -p data
+	$(V)$(MAKE) -C nds-bootloader LOADBIN=$@
+
+arm9: $(BOOTLOADER)
 	$(V)+$(MAKE) -f Makefile.arm9 --no-print-directory
 
-arm9_ak2:
+arm9_ak2: $(BOOTLOADER)
 	$(V)+$(MAKE) -f Makefile.arm9 PLATFORM=ak2 --no-print-directory
 
-arm9_dsi:
+arm9_dsi: $(BOOTLOADER)
 	$(V)+$(MAKE) -f Makefile.arm9 PLATFORM=dsi --no-print-directory
 
-arm9_pico:
+arm9_pico: $(BOOTLOADER)
 	$(V)+$(MAKE) -f Makefile.arm9 PLATFORM=pico --no-print-directory
 
 arm7:
