@@ -29,10 +29,7 @@
 #include <unistd.h>
 #include <fat.h>
 
-/* LHS CHANGE START - load bootlib from disk */
-//#include "load_bin.h"
-#include <systemfilenames.h>
-/* LHS CHANGE END - load bootlib from disk */
+#include "load_bin.h"
 
 #ifndef _NO_BOOTSTUB_
 #include "bootstub_bin.h"
@@ -365,21 +362,7 @@ eRunNdsRetCode runNdsFile (const char* filename, int argc, const char** argv)  {
 	int pathLen;
 	const char* args[1];
 
-	/* LHS CHANGE START - load bootlib from disk */
-	u8 *load_bin;
-	u32 load_bin_size;
-
-	FILE* loadBinaryFile = fopen(SFN_BOOTLIB, "rb");
-	if (!loadBinaryFile)
-		return RUN_NDS_LOADER_MISSING;
-	fseek(loadBinaryFile, 0, SEEK_END);
-	load_bin_size = ftell(loadBinaryFile);
-	fseek(loadBinaryFile, 0, SEEK_SET);
-	load_bin = (u8*)malloc(load_bin_size);
-	fread(load_bin, 1, load_bin_size, loadBinaryFile);
-	fclose(loadBinaryFile);
-	/* LHS CHANGE END - load bootlib from disk */
-
+	
 	if (stat (filename, &st) < 0) {
 		return RUN_NDS_STAT_FAILED;
 	}

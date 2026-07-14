@@ -57,8 +57,6 @@
 
 #define SFN_CHEATS SFN_SYSTEM_DIR "cheats/usrcheat.dat"
 
-#define SFN_BOOTLIB SFN_SYSTEM_DIR "load.bin"
-
 #define SFN_DSHOMEBREW_DIR "/_nds/"
 #define SFN_NDS_BOOTSTRAP_DIR SFN_DSHOMEBREW_DIR "nds-bootstrap/"
 #define SFN_NDS_BOOTSTRAP_CHEATDATA SFN_NDS_BOOTSTRAP_DIR "cheatData.bin"
