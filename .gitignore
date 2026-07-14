@@ -5,3 +5,4 @@ data/load.bin
 *.dsi
 *.pcf
 *.dldi
+nds-bootloader
