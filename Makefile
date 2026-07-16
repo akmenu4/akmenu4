@@ -72,8 +72,7 @@ clean:
 	@echo "  CLEAN"
 	$(V)$(MAKE) -f Makefile.arm9 clean --no-print-directory
 	$(V)$(MAKE) -f Makefile.arm7 clean --no-print-directory
-	$(V)$(RM) $(ROM) build $(SDIMAGE)
-	$(V)$(RM) -rf data
+	$(V)$(RM) $(ROM) $(ROM_AK2) $(ROM_DSI) $(ROM_PICO) data build $(SDIMAGE)
 
 $(BOOTLOADER):
 	$(MKDIR) -p data
