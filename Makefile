@@ -57,7 +57,7 @@ ARM7DIR		:= arm7
 
 ROM			:= $(NAME).nds
 ROM_AK2		:= $(NAME)_ak2.nds
-ROM_DSI		:= $(NAME).dsi
+ROM_DSI		:= $(NAME)_dsi.nds
 ROM_PICO	:= $(NAME)_pico.nds
 BOOTLOADER	:= $(CURDIR)/data/load.bin
 
@@ -72,6 +72,7 @@ clean:
 	@echo "  CLEAN"
 	$(V)$(MAKE) -f Makefile.arm9 clean --no-print-directory
 	$(V)$(MAKE) -f Makefile.arm7 clean --no-print-directory
+	$(V)$(MAKE) -C nds-bootloader clean --no-print-directory
 	$(V)$(RM) $(ROM) $(ROM_AK2) $(ROM_DSI) $(ROM_PICO) data build $(SDIMAGE)
 
 $(BOOTLOADER):
