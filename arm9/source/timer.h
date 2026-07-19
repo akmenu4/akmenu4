@@ -29,8 +29,6 @@ class cTimer {
 
     double getTime();
 
-    vu64 getTick();
-
     double tickToUs(u64 tick);
 
   private:
