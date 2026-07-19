@@ -35,6 +35,7 @@ cUserWindow::cUserWindow() : cWindow(NULL, "UserWindow") {
 
 void cUserWindow::init() {
     CIniFile ini(SFN_USER_CUSTOM);
+    s16 userSettingsName[10] = {};
     std::string pictureFilename = ini.GetString("custom picture", "file", "");
     if (pictureFilename != "") {
         struct stat st;
@@ -60,7 +61,8 @@ void cUserWindow::init() {
     _showUserName = ini.GetInt("user name", "show", 0);
     _showCustomText = ini.GetInt("custom text", "show", 0);
     _showCustomPic = ini.GetInt("custom picture", "show", 0);
-    _userName = unicode_to_local_string((u16*)PersonalData->name, PersonalData->nameLen, NULL);
+    memcpy(userSettingsName, PersonalData->name, sizeof(userSettingsName));
+    _userName = unicode_to_local_string((u16*)userSettingsName, PersonalData->nameLen, NULL);
 }
 
 void cUserWindow::draw() {
