@@ -155,7 +155,7 @@ DEPS		:= $(OBJS:.o=.d)
 
 all: $(ELF)
 
-$(ELF): $(BOOTLOADER_BIN) $(OBJS)
+$(ELF): $(OBJS)
 	@echo "  LD.9    $@"
 	$(V)$(LD) -o $@ $(OBJS) $(LDFLAGS)
 
