@@ -58,7 +58,9 @@ bool DSRomInfo::loadDSRomInfo(const std::string& filename, bool loadBanner) {
     } else {
         _isDSRom = ETrue;
         if ((u32)(header.arm7destination) >= 0x037F8000 ||
-            0x23232323 == gamecode(header.gameCode)) {  // 23->'#'
+            0x23232323 == gamecode(header.gameCode) ||  // 23->'#'
+            0 == gamecode(header.gameCode)) {  // Retail ROMs don't set a null gamecode. Found on
+                                               // Unlaunch installer
             _isHomebrew = ETrue;
         }
     }
