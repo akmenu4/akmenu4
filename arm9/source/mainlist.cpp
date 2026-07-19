@@ -222,8 +222,9 @@ bool cMainList::enterDir(const std::string& dirName) {
             while ((entry = readdir(dir)) != NULL) {
                 std::string lfn(entry->d_name);
 
-                // Don't show MacOS dotfiles
-                if (!gs().showHiddenFiles && lfn[0] == '.') {
+                // Hide FAT hidden files and macOS dotfiles unless enabled in settings
+                if (!gs().showHiddenFiles &&
+                    (lfn[0] == '.' || FAT_getAttr((dirName + lfn).c_str()) & ATTR_HIDDEN)) {
                     continue;
                 }
 
