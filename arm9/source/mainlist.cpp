@@ -183,42 +183,41 @@ bool cMainList::enterDir(const std::string& dirName) {
 
     // list dir
     {
+        // Collect directory entries into structs to avoid repeated
+        // reallocation of DSRomInfo objects which would OOM on larger dirs
+        struct DirEntry {
+            std::string showName;
+            std::string realName;
+            bool isDir;
+        };
+        std::vector<DirEntry> entries;
+        entries.reserve(256);
+
         cwl();
         if (favorites) {
             CIniFile ini(SFN_FAVORITES);
 
             std::vector<std::string> items;
             ini.GetStringVector("main", "list", items, '|');
+            std::string showname = "", realname = "";
             for (size_t ii = 0; ii < items.size(); ++ii) {
-                u32 row_count = getRowCount();
-                std::vector<std::string> a_row;
-                a_row.push_back("");  // make a space for icon
-
                 size_t pos = items[ii].rfind('/', items[ii].length() - 2);
                 if (pos == items[ii].npos) {
-                    a_row.push_back(items[ii]);  // show name
+                    showname = items[ii];  // show name
                 } else {
-                    a_row.push_back(items[ii].substr(pos + 1, items[ii].npos));  // show name
+                    showname = items[ii].substr(pos + 1, items[ii].npos);  // show name
                 }
-                a_row.push_back("");  // make a space for internal name
+                realname = items[ii];  // real name
 
-                a_row.push_back(items[ii]);  // real name
-                size_t insertPos(row_count);
-                insertRow(insertPos, a_row);
-                DSRomInfo rominfo;
-                _romInfoList.push_back(rominfo);
+                bool isDir = (FAT_getAttr(realname.c_str()) & ATTR_DIRECTORY) ? true : false;
+
+                DirEntry de;
+                de.showName = showname;
+                de.realName = realname;
+                de.isDir = isDir;
+                entries.push_back(de);
             }
         } else if (dir) {
-            // Collect directory entries into structs to avoid repeated
-            // reallocation of DSRomInfo objects which would OOM on larger dirs
-            struct DirEntry {
-                std::string showName;
-                std::string realName;
-                bool isDir;
-            };
-            std::vector<DirEntry> entries;
-            entries.reserve(256);
-
             while ((entry = readdir(dir)) != NULL) {
                 std::string lfn(entry->d_name);
 
@@ -253,62 +252,62 @@ bool cMainList::enterDir(const std::string& dirName) {
                 entries.push_back(de);
             }
             closedir(dir);
-
-            std::sort(entries.begin(), entries.end(), [](const DirEntry& a, const DirEntry& b) {
-                if ("../" == a.showName) return true;
-                if ("../" == b.showName) return false;
-                if (a.isDir && b.isDir) return a.showName < b.showName;
-                if (a.isDir) return true;
-                if (b.isDir) return false;
-                return a.showName < b.showName;
-            });
-
-            // Build rows and rominfos in one pre-allocated pass
-            _romInfoList.reserve(entries.size());
-
-            for (size_t ii = 0; ii < entries.size(); ++ii) {
-                const DirEntry& de = entries[ii];
-
-                std::vector<std::string> a_row;
-                a_row.push_back("");           // icon
-                a_row.push_back(de.showName);  // show name
-                a_row.push_back("");           // internal name
-                a_row.push_back(de.realName);  // real name
-                insertRow(ii, a_row);
-
-                DSRomInfo rominfo;
-                const std::string& filename = de.realName;
-
-                if (de.isDir) {
-                    rominfo.setBanner("folder", folder_banner_bin);
-                } else {
-                    size_t lastDotPos = filename.find_last_of('.');
-                    extName = (filename.npos != lastDotPos) ? filename.substr(lastDotPos) : "";
-                    for (size_t jj = 0; jj < extName.size(); ++jj)
-                        extName[jj] = tolower(extName[jj]);
-
-                    bool allowExt = true, allowUnknown = false;
-                    if (".sav" == extName) {
-                        memcpy(&rominfo.banner(), nds_save_banner_bin, sizeof(tNDSBanner));
-                    } else if (".gba" == extName) {
-                        rominfo.MayBeGbaRom(filename);
-                    } else if (".nds" != extName && ".dsi" != extName && ".srl" != extName) {
-                        memcpy(&rominfo.banner(), unknown_banner_bin, sizeof(tNDSBanner));
-                        allowUnknown = true;
-                    } else {
-                        rominfo.MayBeDSRom(filename);
-                        allowExt = false;
-                    }
-                    if (allowExt) {
-                        rominfo.setExtIcon(de.showName);
-                        if (extName.length() && !rominfo.isExtIcon())
-                            rominfo.setExtIcon(extName.substr(1));
-                    }
-                    if (allowUnknown && !rominfo.isExtIcon()) rominfo.setExtIcon("unknown");
-                }
-                _romInfoList.push_back(rominfo);
-            }
         }
+
+        std::sort(entries.begin(), entries.end(), [](const DirEntry& a, const DirEntry& b) {
+            if ("../" == a.showName) return true;
+            if ("../" == b.showName) return false;
+            if (a.isDir && b.isDir) return a.showName < b.showName;
+            if (a.isDir) return true;
+            if (b.isDir) return false;
+            return a.showName < b.showName;
+        });
+
+        // Build rows and rominfos in one pre-allocated pass
+        _romInfoList.reserve(entries.size());
+
+        for (size_t ii = 0; ii < entries.size(); ++ii) {
+            const DirEntry& de = entries[ii];
+
+            std::vector<std::string> a_row;
+            a_row.push_back("");           // icon
+            a_row.push_back(de.showName);  // show name
+            a_row.push_back("");           // internal name
+            a_row.push_back(de.realName);  // real name
+            insertRow(ii, a_row);
+
+            DSRomInfo rominfo;
+            const std::string& filename = de.realName;
+
+            if (de.isDir) {
+                rominfo.setBanner("folder", folder_banner_bin);
+            } else {
+                size_t lastDotPos = filename.find_last_of('.');
+                extName = (filename.npos != lastDotPos) ? filename.substr(lastDotPos) : "";
+                for (size_t jj = 0; jj < extName.size(); ++jj) extName[jj] = tolower(extName[jj]);
+
+                bool allowExt = true, allowUnknown = false;
+                if (".sav" == extName) {
+                    memcpy(&rominfo.banner(), nds_save_banner_bin, sizeof(tNDSBanner));
+                } else if (".gba" == extName) {
+                    rominfo.MayBeGbaRom(filename);
+                } else if (".nds" != extName && ".dsi" != extName && ".srl" != extName) {
+                    memcpy(&rominfo.banner(), unknown_banner_bin, sizeof(tNDSBanner));
+                    allowUnknown = true;
+                } else {
+                    rominfo.MayBeDSRom(filename);
+                    allowExt = false;
+                }
+                if (allowExt) {
+                    rominfo.setExtIcon(de.showName);
+                    if (extName.length() && !rominfo.isExtIcon())
+                        rominfo.setExtIcon(extName.substr(1));
+                }
+                if (allowUnknown && !rominfo.isExtIcon()) rominfo.setExtIcon("unknown");
+            }
+            _romInfoList.push_back(rominfo);
+        }
+
         std::sort(_saves.begin(), _saves.end(), stringComp);
         _currentDir = dirName;
     }
