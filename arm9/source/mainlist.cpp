@@ -54,8 +54,7 @@ cMainList::cMainList(s32 x, s32 y, u32 w, u32 h, cWindow* parent, const std::str
         _topSlot2 = 3;
         _topdsiSD = 1;
         _topFavorites = 2;
-    }
-    else // not dsi
+    } else  // not dsi
     {
         _topCount = 3;
         _topdsiSD = 3;
@@ -330,7 +329,8 @@ void cMainList::onScrolled(u32 index) {
 void cMainList::backParentDir() {
     if ("..." == _currentDir) return;
 
-    bool fat1 = (SD_ROOT_0 == _currentDir), fat2 = (SD_ROOT_1 == _currentDir), favorites = ("favorites:/" == _currentDir);
+    bool fat1 = (SD_ROOT_0 == _currentDir), fat2 = (SD_ROOT_1 == _currentDir),
+         favorites = ("favorites:/" == _currentDir);
     if ("fat:/" == _currentDir || "sd:/" == _currentDir || fat1 || fat2 || favorites ||
         "/" == _currentDir) {
         enterDir("...");
