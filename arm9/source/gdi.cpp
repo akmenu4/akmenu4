@@ -23,65 +23,18 @@ static inline void dmaCopyWordsGdi(uint8 channel, const void* src, void* dest, u
     DC_InvalidateRange(dest, size);
 }
 
-#ifdef DEBUG
-PrintConsole custom_console;
-
-static void MyInitConsole(u16* aBufferSub1, u16* aBufferSub2) {
-    custom_console = *consoleGetDefault();
-
-    custom_console.loadGraphics = false;
-
-    consoleInit(&custom_console, custom_console.bgLayer, BgType_Text4bpp, BgSize_T_256x256,
-                custom_console.mapBase, custom_console.gfxBase, false, false);
-
-    custom_console.fontBgMap = aBufferSub1;
-    custom_console.fontBgGfx = aBufferSub2;
-
-    dmaCopy(custom_console.font.gfx, custom_console.fontBgGfx,
-            custom_console.font.numChars * 64 / 2);
-    custom_console.fontCurPal = 15 << 12;
-
-    u16* palette = BG_PALETTE_SUB;
-    palette[1 * 16 - 15] = RGB15(0, 0, 0);    // 30 normal black
-    palette[2 * 16 - 15] = RGB15(15, 0, 0);   // 31 normal red
-    palette[3 * 16 - 15] = RGB15(0, 15, 0);   // 32 normal green
-    palette[4 * 16 - 15] = RGB15(15, 15, 0);  // 33 normal yellow
-
-    palette[5 * 16 - 15] = RGB15(0, 0, 15);    // 34 normal blue
-    palette[6 * 16 - 15] = RGB15(15, 0, 15);   // 35 normal magenta
-    palette[7 * 16 - 15] = RGB15(0, 15, 15);   // 36 normal cyan
-    palette[8 * 16 - 15] = RGB15(24, 24, 24);  // 37 normal white
-
-    palette[9 * 16 - 15] = RGB15(15, 15, 15);  // 40 bright black
-    palette[10 * 16 - 15] = RGB15(31, 0, 0);   // 41 bright red
-    palette[11 * 16 - 15] = RGB15(0, 31, 0);   // 42 bright green
-    palette[12 * 16 - 15] = RGB15(31, 31, 0);  // 43 bright yellow
-
-    palette[13 * 16 - 15] = RGB15(0, 0, 31);    // 44 bright blue
-    palette[14 * 16 - 15] = RGB15(31, 0, 31);   // 45 bright magenta
-    palette[15 * 16 - 15] = RGB15(0, 31, 31);   // 46 bright cyan
-    palette[16 * 16 - 15] = RGB15(31, 31, 31);  // 47 & 39 bright white
-}
-#endif
-
 cGdi::cGdi() {
     _transColor = 0;
     _mainEngineLayer = MEL_UP;
     _subEngineMode = SEM_TEXT;
     _bufferMain2 = NULL;
     _bufferSub2 = NULL;
-#ifdef DEBUG
-    _bufferSub3 = NULL;
-#endif
     _sprites = NULL;
 }
 
 cGdi::~cGdi() {
     if (NULL != _bufferMain2) delete[] _bufferMain2;
     if (NULL != _bufferSub2) delete[] _bufferSub2;
-#ifdef DEBUG
-    if (NULL != _bufferSub3) delete[] _bufferSub3;
-#endif
     if (NULL != _sprites) delete[] _sprites;
 }
 
@@ -164,11 +117,6 @@ void cGdi::activeFbMain(void) {
 }
 
 void cGdi::activeFbSub(void) {
-#ifdef DEBUG
-    _bufferSub3 = (u16*)new u32[0x1200];
-    MyInitConsole(_bufferSub3 + 0x2000, _bufferSub3);
-#endif
-
     // 分配显存存， 128k
     vramSetBankC(VRAM_C_SUB_BG_0x06200000);  // 128k
 
@@ -196,10 +144,6 @@ void cGdi::activeFbSub(void) {
     // 字模从 block 8 开始 = 0x06200000 + 8 * 0x4000      = 0x06220000
     // 文字信息从 block 72 开始 = 0x06200000 + 72 * 0x800 = 0x06224000
     // 优先级 2
-#ifdef DEBUG
-    BG_PALETTE_SUB[255] = RGB15(31, 31, 31);  // by default font will be rendered with color 255
-    REG_BG0CNT_SUB = BG_TILE_BASE(0) | BG_MAP_BASE(8) | BG_PRIORITY_2;
-#endif
 
     swiWaitForVBlank();  // remove tearing at top screen
     // 模式5，开两层BG，一层BMP，一层文字(用于调试)，bmp层现在默认关闭
@@ -564,24 +508,3 @@ void cGdi::present(void) {
     dmaCopyWordsGdi(3, _bufferMain2 + (256 * 192), _bufferMain1 + (1 << 16), 256 * 192 * 2);
     fillMemory((void*)_bufferMain2, 256 * 192 * 4, 0);
 }
-
-#ifdef DEBUG
-void cGdi::switchSubEngineMode() {
-    // 需要保存和恢复文本模式的现场
-    switch (_subEngineMode) {
-        case SEM_GRAPHICS:  // 当前是图形模式的话，就恢复刚才的text现场
-            videoSetModeSub(MODE_5_2D | DISPLAY_BG0_ACTIVE);
-            custom_console.fontBgMap = (u16*)0x6204000;
-            custom_console.fontBgGfx = (u16*)0x6200000;
-            dmaCopyWordsGdi(3, (void*)_bufferSub3, (void*)_bufferSub1, 0x4800);
-            break;
-        case SEM_TEXT:  // 当前是文字模式的话，保存现场，切到图形模式
-            videoSetModeSub(MODE_5_2D | DISPLAY_BG2_ACTIVE);
-            custom_console.fontBgMap = _bufferSub3 + 0x2000;
-            custom_console.fontBgGfx = _bufferSub3;
-            dmaCopyWordsGdi(3, (void*)_bufferSub1, (void*)_bufferSub3, 0x4800);
-            break;
-    };
-    _subEngineMode = (SUB_ENGINE_MODE)(_subEngineMode ^ 1);
-}
-#endif

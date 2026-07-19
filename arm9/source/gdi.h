@@ -98,10 +98,6 @@ class cGdi {
 
     void present(void);
 
-#ifdef DEBUG
-    void switchSubEngineMode();
-#endif
-
   protected:
     void swapLCD(void);
     void activeFbMain(void);  // fb = frame buffer
@@ -120,9 +116,6 @@ class cGdi {
     u32 _layerPitch;
     u16* _bufferSub1;
     u16* _bufferSub2;
-#ifdef DEBUG
-    u16* _bufferSub3;
-#endif
     cSprite* _sprites;
     cBMP15 _background;
 };

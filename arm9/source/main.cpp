@@ -65,7 +65,7 @@ int main(void) {
     // init graphics
     gdi().init();
 #ifdef DEBUG
-    gdi().switchSubEngineMode();
+    consoleDebugInit(DebugDevice_NOCASH);
 #endif  // DEBUG
     dbg_printf("gdi ok\n");
 

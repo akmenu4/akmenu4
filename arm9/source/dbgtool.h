@@ -20,7 +20,7 @@
 static inline int dbg_printf(const char* format, ...) {
     va_list args;
     va_start(args, format);
-    int ret = vprintf(format, args);
+    int ret = vfprintf(stderr, format, args);
     va_end(args);
     return ret;
 }
