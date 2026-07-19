@@ -27,12 +27,8 @@ DEFINES		:= -D_NO_BOOTSTUB_
 ifneq ($(findstring ak2,$(PLATFORM)),)
 DEFINES	+= -D__KERNEL_LAUNCHER_SUPPORT__ -D__AKLOADER_AK2__
 else
-ifneq ($(findstring dsi,$(PLATFORM)),)
-DEFINES	+= -D__DSIMODE__
-else
 ifneq ($(findstring pico,$(PLATFORM)),)
 DEFINES	+= -D__KERNEL_LAUNCHER_SUPPORT__ -D__PICOLAUNCHER__
-endif
 endif
 endif
 
