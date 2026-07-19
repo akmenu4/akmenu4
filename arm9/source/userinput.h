@@ -26,7 +26,7 @@ typedef struct T_INPUT {
     bool touchUp;
     bool touchHeld;
     bool touchMoved;
-    bool operator==(const T_INPUT& src) {
+    bool operator==(const T_INPUT& src) const {
         return keysHeld == src.keysHeld && keysUp == src.keysUp && keysDown == src.keysDown &&
                keysDownRepeat == src.keysDownRepeat && touchPt.px == src.touchPt.px &&
                touchPt.py == src.touchPt.py && movedPt.px == src.movedPt.px &&
