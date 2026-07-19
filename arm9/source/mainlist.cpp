@@ -224,6 +224,11 @@ bool cMainList::enterDir(const std::string& dirName) {
             while ((entry = readdir(dir)) != NULL) {
                 std::string lfn(entry->d_name);
 
+                // Don't show MacOS dotfiles
+                if (!gs().showHiddenFiles && lfn[0] == '.') {
+                    continue;
+                }
+
                 // entry->d_type == DT_DIR indicates a directory
                 size_t lastDotPos = lfn.find_last_of('.');
                 if (lfn.npos != lastDotPos)
