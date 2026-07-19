@@ -55,9 +55,8 @@ ARM7DIR		:= arm7
 # Build artfacts
 # --------------
 
-ROM			:= $(NAME).nds
+ROM			:= $(NAME)_default.nds
 ROM_AK2		:= $(NAME)_ak2.nds
-ROM_DSI		:= $(NAME)_dsi.nds
 ROM_PICO	:= $(NAME)_pico.nds
 BOOTLOADER	:= $(CURDIR)/data/load.bin
 
@@ -84,9 +83,6 @@ arm9: $(BOOTLOADER)
 
 arm9_ak2: $(BOOTLOADER)
 	$(V)+$(MAKE) -f Makefile.arm9 PLATFORM=ak2 --no-print-directory
-
-arm9_dsi: $(BOOTLOADER)
-	$(V)+$(MAKE) -f Makefile.arm9 PLATFORM=dsi --no-print-directory
 
 arm9_pico: $(BOOTLOADER)
 	$(V)+$(MAKE) -f Makefile.arm9 PLATFORM=pico --no-print-directory
@@ -120,13 +116,6 @@ $(ROM_AK2): arm9_ak2 arm7
 	@echo "  NDSTOOL $@"
 	$(V)$(BLOCKSDS)/tools/ndstool/ndstool -c $@ \
 		-7 build/arm7.elf -9 build/arm9_ak2.elf \
-		-b $(GAME_ICON) "$(GAME_FULL_TITLE)" \
-		$(NDSTOOL_ARGS)
-
-$(ROM_DSI): arm9_dsi arm7
-	@echo "  NDSTOOL $@"
-	$(V)$(BLOCKSDS)/tools/ndstool/ndstool -c $@ \
-		-7 build/arm7.elf -9 build/arm9_dsi.elf \
 		-b $(GAME_ICON) "$(GAME_FULL_TITLE)" \
 		$(NDSTOOL_ARGS)
 
