@@ -13,14 +13,6 @@
 
 #include <picoLoader7.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-void __libnds_exit(int rc) {}
-#ifdef __cplusplus
-}
-#endif
-
 void VblankHandler(void) {
     inputGetAndSend();
 }
